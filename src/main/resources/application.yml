@@ -4,4 +4,4 @@ spring:
   jpa:    show-sql: true
     server:
   servlet:
-    context-path: /islope  port: 9999
+    context-path: /dev  port: 9999
