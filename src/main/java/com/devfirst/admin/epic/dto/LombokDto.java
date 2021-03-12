@@ -1,4 +1,4 @@
-package com.devfirst.admin.epic.web.dto;
+package com.devfirst.admin.epic.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -2,7 +2,11 @@ package com.devfirst.admin.epic.repository;
 
 import com.devfirst.admin.epic.domain.Post;
 import com.devfirst.admin.epic.domain.PostRepository;
+import com.devfirst.admin.epic.domain.mapper.PostMapper;
+import com.devfirst.admin.epic.dto.PostResponsetDto;
+
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,13 @@ public class PostRepositoryTest {
 
     @Autowired
     PostRepository postRepository;
+    
+    Post post;
+    
+    @Before
+    public void init() {
+    	this.post = Post.builder().title("제목").content("내용").build(); 
+    }
 
     @After
     public void cleanUp() {
@@ -25,10 +36,16 @@ public class PostRepositoryTest {
 
     @Test
     public void 포스트저장불러오기() throws Exception {
-        postRepository.save(Post.builder()
-            .title("제목").content("내용").build());
+        postRepository.save(post);
         Post post = postRepository.findAll().get(0);
         assertThat(post.getId()).isEqualTo(1);
         assertThat(post.getTitle()).isEqualTo("제목");
+    }
+    
+    @Test
+    public void Mapstruct_테스트() throws Exception {
+    	System.out.println("::DEBUG:: " + post.getTitle());
+    	PostResponsetDto postResponsetDto = PostMapper.INSTANCE.postToPostResponseDto(post);
+    	assertThat(postResponsetDto.getTitle()).isEqualTo(post.getTitle());
     }
 }
