@@ -1,11 +1,12 @@
 package com.devfirst.admin.epic.dto;
 
-import lombok.AllArgsConstructor;
+import com.devfirst.admin.epic.domain.Post;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor
-public class PostResponsetDto {
+@NoArgsConstructor
+public class PostResponseDto {
 	
 	private Long id;
 	private String title;

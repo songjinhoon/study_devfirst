@@ -11,16 +11,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = HelloController.class) //JPA기능 작동않함
-public class HelloControllerTest {
+@WebMvcTest(controllers = PostController.class)
+public class PostControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @Test
-    public void hello_를리턴시켜라() throws Exception {
-        mvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+    public void index_페이지() throws Exception {
+        mvc.perform(get("/post/list")) // contextpath 제외해야함.
+                .andExpect(status().isOk());
     }
 }

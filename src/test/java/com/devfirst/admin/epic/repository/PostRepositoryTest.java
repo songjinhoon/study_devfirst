@@ -3,7 +3,7 @@ package com.devfirst.admin.epic.repository;
 import com.devfirst.admin.epic.domain.Post;
 import com.devfirst.admin.epic.domain.PostRepository;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
-import com.devfirst.admin.epic.dto.PostResponsetDto;
+import com.devfirst.admin.epic.dto.PostResponseDto;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,7 +45,7 @@ public class PostRepositoryTest {
     @Test
     public void Mapstruct_테스트() throws Exception {
     	System.out.println("::DEBUG:: " + post.getTitle());
-    	PostResponsetDto postResponsetDto = PostMapper.INSTANCE.postToPostResponseDto(post);
+    	PostResponseDto postResponsetDto = PostMapper.INSTANCE.postToPostResponseDto(post);
     	assertThat(postResponsetDto.getTitle()).isEqualTo(post.getTitle());
     }
 }
