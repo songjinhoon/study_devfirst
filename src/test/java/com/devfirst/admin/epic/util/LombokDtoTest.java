@@ -1,8 +1,7 @@
-package com.devfirst.admin.epic.web.dto;
-
-import org.junit.Test;
+package com.devfirst.admin.epic.util;
 
 import com.devfirst.admin.epic.dto.LombokDto;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "M_POST")
-public class Post {
+public class Post extends BaseTimeEntity{
 
     @Id
     @GeneratedValue
