@@ -1,2 +1,0 @@
-com/devfirst/admin/Application.java
- com.devfirst.admin.Application

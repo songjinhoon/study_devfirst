@@ -1,4 +1,7 @@
+# Gradle
 .gradle
+build/
+
 .idea
 .project
 .classpath
@@ -6,4 +9,3 @@
 bin/
 .apt_generated/
 .factorypath
-build/

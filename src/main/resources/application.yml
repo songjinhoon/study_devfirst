@@ -1,7 +1,14 @@
 spring:
-  profiles:    active: dev
-  h2:    console:      enabled: true
-  jpa:    show-sql: true
-    server:
+  profiles:
+    active: dev
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+
+    
+server:
   servlet:
-    context-path: /dev  port: 9999
+    context-path: /dev
+  port: 9999
