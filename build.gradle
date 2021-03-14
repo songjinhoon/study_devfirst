@@ -40,6 +40,11 @@ dependencies {
     
     // FileUtils
     implementation 'commons-io:commons-io:2.4'
+
+    // lombok test error
+    testCompile "org.projectlombok:lombok"
+    annotationProcessor('org.projectlombok:lombok')
+    testAnnotationProcessor('org.projectlombok:lombok')
     
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
