@@ -2,6 +2,12 @@
 .gradle
 build/
 
+# Mapstruct
+generated/
+
+# webpack
+node_modules/
+
 .idea
 .project
 .classpath

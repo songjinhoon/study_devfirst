@@ -9,6 +9,11 @@ spring:
     #properties:
      # hibernate:
       #  dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  devtools:
+    livereload:
+      enabled: true
+    #restart:
+      #enabled: true
 
 server:
   servlet:
