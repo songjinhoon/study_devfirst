@@ -1,5 +1,5 @@
 import $ from 'jquery';
 
-$('#testBtn').click(() => {
+$('#testBtn').on('click', () => {
 	console.log(this);
 });
