@@ -9,12 +9,15 @@ spring:
     #properties:
      # hibernate:
       #  dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-  devtools:
-    livereload:
-      enabled: true
+  #devtools:
+    #livereload:
+      #enabled: true
     #restart:
       #enabled: true
-
+ 
+handlebars:
+  cache: false
+    
 server:
   servlet:
     context-path: /dev

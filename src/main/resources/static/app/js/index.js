@@ -1,2 +1,5 @@
+import $ from 'jquery';
 
-    console.log("ggggg");
+$('#testBtn').click(() => {
+	console.log(this);
+});
