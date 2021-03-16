@@ -5,7 +5,16 @@ import com.devfirst.admin.epic.domain.PostRepository;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMap.Builder;
+
 import lombok.RequiredArgsConstructor;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,5 +39,23 @@ public class PostService {
         Post post = postRepository.findById(id).orElse(null);
         post.update(postRequestDto.getTitle(), postRequestDto.getContent());
         return PostMapper.INSTANCE.postToPostResponseDto(post);
+    }
+    
+    public List<PostResponseDto> findBySearchParameter(final Pageable pageable) {
+    	Page<Post> result = postRepository.findAll(pageable);
+    	List<Post> posts = result.getContent();
+    	List<PostResponseDto> postsResponseDtos = PostMapper.INSTANCE.postsToPostResponseDtos(posts); 
+    	
+    	return postsResponseDtos;
+    }
+    
+    public ImmutableMap<String, Object> findAll(final Pageable pageable) {
+    	Page<Post> result = postRepository.findAll(pageable);
+    	ImmutableMap<String, Object> pageAndpostResponseDtos = ImmutableMap.<String, Object>builder()
+    			.put("posts", PostMapper.INSTANCE.postsToPostResponseDtos(result.getContent()))
+    			.put("totalPage", result.getTotalPages())
+    			.put("hasNext", result.hasNext()).build();
+    	
+    	return pageAndpostResponseDtos;
     }
 }

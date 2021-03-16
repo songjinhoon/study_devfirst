@@ -1,9 +1,12 @@
 package com.devfirst.admin.epic.domain.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
 
 import com.devfirst.admin.epic.domain.Post;
 import com.devfirst.admin.epic.dto.PostResponseDto;
@@ -14,4 +17,5 @@ public interface PostMapper {
 	PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);
 	
 	PostResponseDto postToPostResponseDto(Post post);
+	List<PostResponseDto> postsToPostResponseDtos(List<Post> posts);
 }

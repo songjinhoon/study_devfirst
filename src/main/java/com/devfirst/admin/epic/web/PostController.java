@@ -1,15 +1,28 @@
 package com.devfirst.admin.epic.web;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.devfirst.admin.epic.service.PostService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
-@RequestMapping("/post")
+@RequestMapping(value = "/post")
 public class PostController {
+	
+	private final PostService postService;
 	
 	@GetMapping("/list")
 	public String index() {
+		PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.ASC, "id");
+		postService
+		
+		
 		return "/post/index";
 	}
 }
