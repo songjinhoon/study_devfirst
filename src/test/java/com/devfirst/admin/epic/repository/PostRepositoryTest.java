@@ -26,7 +26,7 @@ public class PostRepositoryTest {
     
     @Before
     public void init() {
-    	this.post = Post.builder().title("제목").content("내용").build(); 
+    	
     }
 
     @After
@@ -44,7 +44,7 @@ public class PostRepositoryTest {
     
     @Test
     public void Mapstruct_테스트() throws Exception {
-    	System.out.println("::DEBUG:: " + post.getTitle());
+    	Post post = postRepository.findById(1l).orElse(null);
     	PostResponseDto postResponsetDto = PostMapper.INSTANCE.postToPostResponseDto(post);
     	assertThat(postResponsetDto.getTitle()).isEqualTo(post.getTitle());
     }
