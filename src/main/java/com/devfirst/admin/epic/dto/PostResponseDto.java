@@ -1,9 +1,10 @@
 package com.devfirst.admin.epic.dto;
 
-import com.devfirst.admin.epic.domain.Post;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
 @NoArgsConstructor
 public class PostResponseDto {

@@ -56,13 +56,7 @@ public class PostService {
     			.put("posts", PostMapper.INSTANCE.postsToPostResponseDtos(result.getContent()))
     			.put("totalPage", result.getTotalPages())
     			.put("hasNext", result.hasNext()).build();
-    	
-    	System.out.println("::DEBUG::");
-    	List<PostResponseDto> posts =  (List<PostResponseDto>) pageAndpostResponseDtos.get("posts");
-    	System.out.println(pageAndpostResponseDtos.get("posts"));
-    	System.out.println(posts.size());
-    	System.out.println(posts.get(0).getTitle());
-    	
+
     	return pageAndpostResponseDtos;
     }
 }
