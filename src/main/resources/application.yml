@@ -7,6 +7,11 @@ spring:
     #username: sa
     #password: 
     #driverClassName: org.h2.Driver
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
   h2:
     console:
       enabled: true

@@ -54,8 +54,7 @@ public class PostService {
     	
     	ImmutableMap<String, Object> pageAndpostResponseDtos = ImmutableMap.<String, Object>builder()
     			.put("posts", PostMapper.INSTANCE.postsToPostResponseDtos(result.getContent()))
-    			.put("totalPage", result.getTotalPages())
-    			.put("hasNext", result.hasNext()).build();
+    			.put("pageInfo", result).build();
 
     	return pageAndpostResponseDtos;
     }

@@ -30,15 +30,14 @@ group = 'kr.dev'
 version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
-configurations {
-	developmentOnly
-/*    compileOnly {
-        extendsFrom annotationProcessor
-    }*/
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -47,6 +46,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.projectlombok:lombok')
     compile('com.h2database:h2')
+    compile 'org.springframework.boot:spring-boot-devtools' // 자동재시작
     
     // handlebar
     compile 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.2'
@@ -65,6 +65,4 @@ dependencies {
     testAnnotationProcessor('org.projectlombok:lombok')
     
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    
-    developmentOnly 'org.springframework.boot:spring-boot-devtools' // 자동재시작
 }
