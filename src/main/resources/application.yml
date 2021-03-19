@@ -7,11 +7,6 @@ spring:
     #username: sa
     #password: 
     #driverClassName: org.h2.Driver
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: false
   h2:
     console:
       enabled: true
@@ -22,7 +17,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 handlebars:
   cache: false
-    
+
 server:
   servlet:
     context-path: /dev

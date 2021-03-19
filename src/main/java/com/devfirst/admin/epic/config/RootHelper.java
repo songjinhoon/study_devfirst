@@ -1,5 +1,6 @@
 package com.devfirst.admin.epic.config;
 
+import com.devfirst.admin.epic.config.render.PaginationRenderer;
 import com.github.jknack.handlebars.Handlebars;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,8 @@ public class RootHelper {
 	
 	@Value("${server.servlet.context-path}")
 	private String contextPath;
+
+	private final PaginationRenderer paginationRenderer;
 	
 	public String contextPath() {
 		return this.contextPath;
@@ -22,8 +25,7 @@ public class RootHelper {
 
 	public Handlebars.SafeString pageProcess(Page page) {
 		if(page != null) {
-			System.out.println("::DEBUG::");
-			System.out.println(page.getContent());
+			paginationRenderer.renderPagination(page);
 		}
 		return null;
 	}
