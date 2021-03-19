@@ -41,11 +41,4 @@ public class PostRepositoryTest {
         assertThat(post.getId()).isEqualTo(1);
         assertThat(post.getTitle()).isEqualTo("제목");
     }
-    
-    @Test
-    public void Mapstruct_테스트() throws Exception {
-    	Post post = postRepository.findById(1l).orElse(null);
-    	PostResponseDto postResponsetDto = PostMapper.INSTANCE.postToPostResponseDto(post);
-    	assertThat(postResponsetDto.getTitle()).isEqualTo(post.getTitle());
-    }
 }
