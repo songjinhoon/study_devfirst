@@ -25,7 +25,7 @@ public class RootHelper {
 
 	public Handlebars.SafeString pageProcess(Page page) {
 		if(page != null) {
-			paginationRenderer.renderPagination(page);
+			return new Handlebars.SafeString(paginationRenderer.renderPagination(page));
 		}
 		return null;
 	}
