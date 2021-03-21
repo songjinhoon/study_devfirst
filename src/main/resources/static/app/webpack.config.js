@@ -7,7 +7,7 @@ module.exports = {
     entry: {
         index: "./js/index.js", /* 상대경로 */
 		dashboard: './js/dashboard.js',
-		common: './js/common.js'
+		post: './js/post.js'
     },
     // 번들링 된 결과물이 위치하는 곳
     output: {

@@ -3,7 +3,11 @@ spring:
     active: dev
   devtools:
     restart:
-      enabled: false
+      enabled: true
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
   #datasource:
     #url: jdbc:h2:mem:testdb;MODE=mysql;
     #platform: h2
@@ -18,10 +22,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
 handlebars:
+  prefix: file:src/main/resources/templates/
   cache: false
 
 server:
   servlet:
     context-path: /dev
-  port: 9999
+  port: 9980

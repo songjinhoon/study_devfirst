@@ -1,0 +1,25 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th></th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>작성일</th>
+        <th>수정일</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#map.posts}}
+        <tr>
+            <td>체크2</td>
+            <td>{{title}}</td>
+            <td>{{content}}</td>
+            <td>{{createdDate}}</td>
+            <td>{{modifiedDate}}</td>
+        </tr>
+    {{/map.posts}}
+    </tbody>
+</table>
+<div class="pageDiv">
+    {{pageProcess map.pageInfo}}
+</div>
