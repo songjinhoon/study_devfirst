@@ -6,7 +6,8 @@ module.exports = {
     // 의존성의 시작점
     entry: {
         index: "./js/index.js", /* 상대경로 */
-		dashboard: './js/dashboard.js'
+		dashboard: './js/dashboard.js',
+		common: './js/common.js'
     },
     // 번들링 된 결과물이 위치하는 곳
     output: {
@@ -19,7 +20,7 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/, //node_modules폴더는 패키지 폴더니까 제외처리
                 use: ["babel-loader"]    //es6 -> es5
-            },
+            }
 /*            {
                 test: /\.css$/, //웹팩은 모듈을 다루기 때문에 css파일도 .js로 바꿔준다.
                 use: ["style-loader", "css-loader"]
