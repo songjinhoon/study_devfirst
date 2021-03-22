@@ -18,10 +18,6 @@ public class PaginationRendererImpl implements PaginationRenderer{
         this.otherPageLabel = "<a class=\"\" data-page=\"{0}\" href=\"#\">{0}</a>";;
         this.nextLabel = "<a class=\"\" data-page=\"{0}\" href=\"#\">다음</a>";
         this.previousLabel = "<a class=\"\" data-page=\"{0}\" href=\"#\">이전</a>";
-        /*this.firstPageLabel = "<a data-page-index=\"{0}\" href=\"#\" class=\"direction\"><img src=\"" + contextPath + "/publish/1018/images/btn_prev2.gif\" alt=\"처음\"/></a>";
-        this.previousPageLabel = "<a data-page-index=\"{0}\" href=\"#\" class=\"direction\"><img src=\"" + contextPath + "/publish/1018/images/btn_prev.gif\" alt=\"이전페이지\"/></a>";
-        this.nextPageLabel = "<a data-page-index=\"{0}\" href=\"#\" class=\"direction\"><img src=\"" + contextPath + "/publish/1018/images/btn_next.gif\" alt=\"다음페이지\"/></a>";
-        this.lastPageLabel = "<a data-page-index=\"{0}\" href=\"#\" class=\"direction\"><img src=\"" + contextPath + "/publish/1018/images/btn_next2.gif\" alt=\"마지막\"/></a>"*/;
     }
     // 추후에 Page를 다른타입으로 바꿔줘야한다.
     @Override
@@ -30,56 +26,40 @@ public class PaginationRendererImpl implements PaginationRenderer{
         int totalPageCnt = page.getTotalPages();
         int pageSize = page.getSize();
         int currentPageNo = page.getNumber() + 1;
-        int previousLabelPageNo = (currentPageNo / pageIndexSize) * currentPageNo;
-        int nextLabelPageNo = previousLabelPageNo + pageIndexSize + 1;
-
+        int previousLabelPageNo;
+        int nextLabelPageNo;
+        if((currentPageNo % pageIndexSize) == 0){
+            previousLabelPageNo = currentPageNo - pageIndexSize;
+            nextLabelPageNo = currentPageNo + 1;
+        }else {
+            previousLabelPageNo = (currentPageNo / pageIndexSize) * pageIndexSize;
+            nextLabelPageNo = previousLabelPageNo + pageIndexSize + 1;
+        }
         System.out.println("총 페이지수: " + totalPageCnt);
         System.out.println("페이지 크기: " + pageSize);
         System.out.println("현재 페이지: " + currentPageNo);
+        System.out.println("이전 페이지: " + previousLabelPageNo);
         System.out.println("마지막 페이지: " + nextLabelPageNo);
 
         StringBuilder stringBuilder = new StringBuilder();
-        if(previousLabelPageNo != 0 && nextLabelPageNo - 1 != currentPageNo) {
-            stringBuilder.append(MessageFormat.format(this.previousLabel, Integer.toString(previousLabelPageNo)));
-            if(nextLabelPageNo > totalPageCnt) {
-                for(int i=previousLabelPageNo+1; i<totalPageCnt; i++) {
-                    if(i == currentPageNo) {
-                        stringBuilder.append(MessageFormat.format(this.pageLabel, Integer.toString(i)));
-                        continue;
-                    }
-                    stringBuilder.append(MessageFormat.format(this.otherPageLabel, Integer.toString(i)));
-                }
-            }else {
-                for(int i=previousLabelPageNo+1; i<nextLabelPageNo; i++) {
-                    if(i == currentPageNo) {
-                        stringBuilder.append(MessageFormat.format(this.pageLabel, Integer.toString(i)));
-                        continue;
-                    }
-                    stringBuilder.append(MessageFormat.format(this.otherPageLabel, Integer.toString(i)));
-                }
-                stringBuilder.append(MessageFormat.format(this.nextLabel, Integer.toString(nextLabelPageNo)));
-            }
+        if(currentPageNo > pageIndexSize) stringBuilder.append(MessageFormat.format(this.previousLabel, Integer.toString(previousLabelPageNo)));
+        if(nextLabelPageNo > totalPageCnt) {
+            pageLabelLoop(stringBuilder, currentPageNo, previousLabelPageNo, totalPageCnt+1);
         }else {
-            if(nextLabelPageNo > totalPageCnt) {
-                for(int i=1; i<nextLabelPageNo; i++) {
-                    if(i == currentPageNo) {
-                        stringBuilder.append(MessageFormat.format(this.pageLabel, Integer.toString(i)));
-                        continue;
-                    }
-                    stringBuilder.append(MessageFormat.format(this.otherPageLabel, Integer.toString(i)));
-                }
-            }else {
-                for(int i=previousLabelPageNo+1; i<nextLabelPageNo; i++) {
-                    if(i == currentPageNo) {
-                        stringBuilder.append(MessageFormat.format(this.pageLabel, Integer.toString(i)));
-                        continue;
-                    }
-                    stringBuilder.append(MessageFormat.format(this.otherPageLabel, Integer.toString(i)));
-                }
-                stringBuilder.append(MessageFormat.format(this.nextLabel, Integer.toString(nextLabelPageNo)));
-            }
+            pageLabelLoop(stringBuilder, currentPageNo, previousLabelPageNo, nextLabelPageNo);
+            stringBuilder.append(MessageFormat.format(this.nextLabel, Integer.toString(nextLabelPageNo)));
         }
 
         return stringBuilder.toString();
+    }
+
+    public void pageLabelLoop(StringBuilder stringBuilder, int currentPageNo, int previousLabelPageNo, int limitNum) {
+        for(int i=previousLabelPageNo+1; i<limitNum; i++) {
+            if(i == currentPageNo) {
+                stringBuilder.append(MessageFormat.format(this.pageLabel, Integer.toString(i)));
+                continue;
+            }
+            stringBuilder.append(MessageFormat.format(this.otherPageLabel, Integer.toString(i)));
+        }
     }
 }
