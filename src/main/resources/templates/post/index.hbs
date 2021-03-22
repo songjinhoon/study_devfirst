@@ -2,6 +2,13 @@
 
 	<h1>webpack</h1>
 	<button id="testBtn">버튼반영22</button>
-	<div class="container" id="postListTable"></div>
+	<div class="container" id="postListTable">
+	    <div class="container">
+	        <form class="searchForm" method="get" action="/dev/post/list">
+	            <input type="hidden" name="page" value="{{parameter.page}}" />
+	        <form>
+	    </div>
+	    {{>post/postList}}
+	</div>
 
 {{>layout/footer}}

@@ -1,8 +1,14 @@
-h1 {
-    color: red;
+li {
+    list-style: none;
+    color: #BDBDBD;
 }
+
 .pageDiv {
     display: flex;
     justify-content: center;
     flex-direction: row;
+}
+
+.pageLabel {
+    color: black;
 }

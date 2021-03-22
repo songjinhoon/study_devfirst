@@ -1,17 +1,17 @@
 package com.devfirst.admin.epic.dto;
 
-import lombok.Builder;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@NoArgsConstructor
+@Setter
 public class SearchDto {
 
-    private int page;
+    private int page = 1;
 
-    @Builder
+/*    @Builder
     public SearchDto(int page) {
         this.page = page;
-    }
+    }*/
 }
