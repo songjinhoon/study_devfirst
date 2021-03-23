@@ -48,7 +48,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-devtools' // 자동재시작
     implementation 'commons-io:commons-io:2.4' // FileUtils
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
-    runtimeOnly 'com.h2database:h2'
+    implementation 'com.h2database:h2'
     // handlebar
     implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.2'
     implementation 'org.beryx:handlebars-java-helpers:0.4.1'
