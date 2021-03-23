@@ -5,6 +5,7 @@ import com.devfirst.admin.epic.domain.PostRepository;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
+import com.devfirst.admin.epic.dto.SearchDto;
 import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
@@ -47,9 +48,9 @@ public class PostService {
     	return postsResponseDtos;
     }
     
-    public ImmutableMap<String, Object> findAll(final Pageable pageable) {
+    public ImmutableMap<String, Object> findAll(final Pageable pageable, SearchDto searchDto) {
     	Page<Post> result = postRepository.findAll(pageable);
-    	
+
     	ImmutableMap<String, Object> pageAndpostResponseDtos = ImmutableMap.<String, Object>builder()
     			.put("posts", PostMapper.INSTANCE.postsToPostResponseDtos(result.getContent()))
     			.put("pageInfo", result).build();

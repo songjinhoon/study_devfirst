@@ -22,8 +22,9 @@ public class PostController {
 
 	@GetMapping("/list")
 	public String getIndex(SearchDto searchDto, Model model) {
+		System.out.println("?");
 		PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 4, Sort.Direction.ASC, "id");
-		model.addAttribute("map", postService.findAll(pageRequest));
+		model.addAttribute("map", postService.findAll(pageRequest, searchDto));
 		model.addAttribute("parameter", searchDto);
 		return "/post/index";
 	}

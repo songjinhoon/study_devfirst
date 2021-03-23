@@ -15,9 +15,9 @@ public class PaginationRendererImpl implements PaginationRenderer{
     public PaginationRendererImpl(String contextPath) {
         this.contextPath = contextPath;
         this.pageLabel = "<a class=\"pageLabel\" data-page=\"{0}\" href=\"#\">{0}</a>";
-        this.otherPageLabel = "<a class=\"\" data-page=\"{0}\" href=\"#\">{0}</a>";;
-        this.nextLabel = "<a class=\"\" data-page=\"{0}\" href=\"#\">다음</a>";
-        this.previousLabel = "<a class=\"\" data-page=\"{0}\" href=\"#\">이전</a>";
+        this.otherPageLabel = "<a class=\"otherLabel\" data-page=\"{0}\" href=\"#\">{0}</a>";;
+        this.nextLabel = "<a class=\"nextLabel\" data-page=\"{0}\" href=\"#\">다음</a>";
+        this.previousLabel = "<a class=\"previousLabel\" data-page=\"{0}\" href=\"#\">이전</a>";
     }
     // 추후에 Page를 다른타입으로 바꿔줘야한다.
     @Override

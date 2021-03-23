@@ -9,9 +9,6 @@ import lombok.Setter;
 public class SearchDto {
 
     private int page = 1;
-
-/*    @Builder
-    public SearchDto(int page) {
-        this.page = page;
-    }*/
+    private String title;
+    private String content;
 }

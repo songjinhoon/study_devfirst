@@ -1,13 +1,20 @@
 {{>layout/header}}
 
 	<h1>webpack</h1>
-	<button id="testBtn">버튼반영22</button>
 	<div class="container" id="postListTable">
-	    <div class="container">
-	        <form class="searchForm" method="get" action="/dev/post/list">
-	            <input type="hidden" name="page" value="{{parameter.page}}" />
-	        <form>
-	    </div>
+        <form class="searchForm" method="get" action="/dev/post/list">
+            <div class="row g-3">
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" placeholder="제목" aria-label="제목">
+                </div>
+                <div class="col-sm">
+                    <input type="text" class="form-control" placeholder="내용" aria-label="내용">
+                </div>
+                <div class="col-sm">
+                    <button class="btn btn-primary">조회</button>
+                </div>
+            </div>
+        </form>
 	    {{>post/postList}}
 	</div>
 
