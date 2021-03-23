@@ -3,6 +3,7 @@
 	<h1>webpack</h1>
 	<div class="container" id="postListTable">
         <form class="searchForm" method="get" action="/dev/post/list">
+            <input type="hidden" name="page" value="{{parameter.page}}" />
             <div class="row g-3">
                 <div class="col-sm-7">
                     <input type="text" class="form-control" placeholder="제목" aria-label="제목">

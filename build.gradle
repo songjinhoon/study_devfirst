@@ -23,8 +23,8 @@ plugins {
 	id 'java' 
 	id 'eclipse'
     id 'idea'
-	id 'org.springframework.boot' version '2.1.7.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 group = 'kr.dev'
@@ -42,44 +42,46 @@ repositories {
 }
 
 dependencies {
-	
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'org.projectlombok:lombok'
-    compile 'com.h2database:h2'
-    compile 'org.springframework.boot:spring-boot-devtools' // 자동재시작
-
-    //querydsl
-    compile 'com.querydsl:querydsl-jpa'
-    compile 'com.querydsl:querydsl-apt'
-
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-devtools' // 자동재시작
+    implementation 'commons-io:commons-io:2.4' // FileUtils
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    runtimeOnly 'com.h2database:h2'
     // handlebar
-    compile 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.2'
-    compile 'org.beryx:handlebars-java-helpers:0.4.1'
-    
+    implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.2'
+    implementation 'org.beryx:handlebars-java-helpers:0.4.1'
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     // mapstruct
     implementation 'org.mapstruct:mapstruct:1.4.1.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
-    
-    // FileUtils
-    implementation 'commons-io:commons-io:2.4'
+    // querydsl
+    compile("com.querydsl:querydsl-core") // querydsl
+    compile("com.querydsl:querydsl-jpa") // querydsl
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 
-    // lombok test error
-    testCompile "org.projectlombok:lombok"
-    annotationProcessor('org.projectlombok:lombok')
-    testAnnotationProcessor('org.projectlombok:lombok')
-    
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
-// querydsl 적용
-/*
-def querydslDir = '$buildDir/generated/querydsl'
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
+test {
+    useJUnitPlatform()
 }
+
+def generated='src/main/generated'
 sourceSets {
-    main.java.srcDir querydslDir
+    main.java.srcDirs += [ generated ]
 }
-*/
+
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file(generated)
+}
+
+clean.doLast {
+    file(generated).deleteDir()
+}

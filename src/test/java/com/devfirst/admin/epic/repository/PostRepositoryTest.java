@@ -2,20 +2,16 @@ package com.devfirst.admin.epic.repository;
 
 import com.devfirst.admin.epic.domain.Post;
 import com.devfirst.admin.epic.domain.PostRepository;
-import com.devfirst.admin.epic.domain.mapper.PostMapper;
-import com.devfirst.admin.epic.dto.PostResponseDto;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class PostRepositoryTest {
 
@@ -24,18 +20,19 @@ public class PostRepositoryTest {
     
     Post post;
     
-    @Before
+    @BeforeAll
     public void init() {
     	
     }
 
-    @After
+    @AfterAll
     public void cleanUp() {
         postRepository.deleteAll();
     }
 
     @Test
-    public void 포스트저장불러오기() throws Exception {
+    @DisplayName("post save and get")
+    public void test01() throws Exception {
         postRepository.save(post);
         Post post = postRepository.findAll().get(0);
         assertThat(post.getId()).isEqualTo(1);

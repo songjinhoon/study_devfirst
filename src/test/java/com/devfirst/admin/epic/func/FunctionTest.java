@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FunctionTest {
 	
@@ -14,7 +14,7 @@ public class FunctionTest {
 	}
 	
 	@Test
-	public void 날짜() throws Exception {
+	public void test() throws Exception {
 		LocalTime currentTime = LocalTime.now();   
 		LocalTime targetTime = LocalTime.of(12,33,35,22); 
 		LocalDate now = LocalDate.now();
