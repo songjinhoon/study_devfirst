@@ -1,7 +1,7 @@
 package com.devfirst.admin.epic.web;
 
-import com.devfirst.admin.epic.domain.Post;
-import com.devfirst.admin.epic.domain.PostRepository;
+import com.devfirst.admin.epic.domain.post.Post;
+import com.devfirst.admin.epic.domain.post.PostRepository;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
 import org.junit.jupiter.api.AfterAll;

@@ -1,7 +1,7 @@
 package com.devfirst.admin.epic.util;
 
-import com.devfirst.admin.epic.domain.Post;
-import com.devfirst.admin.epic.domain.PostRepository;
+import com.devfirst.admin.epic.domain.post.Post;
+import com.devfirst.admin.epic.domain.post.PostRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

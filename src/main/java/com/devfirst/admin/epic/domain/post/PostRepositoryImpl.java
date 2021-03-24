@@ -1,11 +1,11 @@
-package com.devfirst.admin.epic.domain;
+package com.devfirst.admin.epic.domain.post;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static com.devfirst.admin.epic.domain.QPost.post;
+import static com.devfirst.admin.epic.domain.post.QPost.post;
 
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepositoryCustom {

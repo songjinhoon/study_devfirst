@@ -1,6 +1,6 @@
 package com.devfirst.admin.epic.util;
 
-import com.devfirst.admin.epic.domain.Post;
+import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
 import com.devfirst.admin.epic.dto.PostResponseDto;
 import org.junit.jupiter.api.DisplayName;

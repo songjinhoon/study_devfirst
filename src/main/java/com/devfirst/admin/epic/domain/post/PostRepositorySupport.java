@@ -1,4 +1,4 @@
-package com.devfirst.admin.epic.domain;
+package com.devfirst.admin.epic.domain.post;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.devfirst.admin.epic.domain.QPost.post;
+import static com.devfirst.admin.epic.domain.post.QPost.post;
 
 @Repository
 public class PostRepositorySupport extends QuerydslRepositorySupport {

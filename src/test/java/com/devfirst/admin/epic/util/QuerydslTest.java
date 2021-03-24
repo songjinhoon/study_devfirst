@@ -2,10 +2,9 @@ package com.devfirst.admin.epic.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.devfirst.admin.epic.domain.Post;
-import com.devfirst.admin.epic.domain.PostRepository;
-import com.devfirst.admin.epic.domain.PostRepositorySupport;
-import org.junit.jupiter.api.AfterAll;
+import com.devfirst.admin.epic.domain.post.Post;
+import com.devfirst.admin.epic.domain.post.PostRepository;
+import com.devfirst.admin.epic.domain.post.PostRepositorySupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

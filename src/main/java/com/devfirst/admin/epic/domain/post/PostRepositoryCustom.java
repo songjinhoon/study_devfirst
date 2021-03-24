@@ -1,4 +1,4 @@
-package com.devfirst.admin.epic.domain;
+package com.devfirst.admin.epic.domain.post;
 
 import java.util.List;
 

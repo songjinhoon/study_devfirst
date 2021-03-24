@@ -1,5 +1,6 @@
-package com.devfirst.admin.epic.domain;
+package com.devfirst.admin.epic.domain.post;
 
+import com.devfirst.admin.epic.domain.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "M_POST")
-public class Post extends BaseTimeEntity{
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

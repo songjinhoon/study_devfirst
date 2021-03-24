@@ -1,6 +1,6 @@
 package com.devfirst.admin.epic.dto;
 
-import com.devfirst.admin.epic.domain.Post;
+import com.devfirst.admin.epic.domain.post.Post;
 
 import lombok.Builder;
 import lombok.Getter;
