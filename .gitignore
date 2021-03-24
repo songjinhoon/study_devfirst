@@ -8,6 +8,9 @@ generated/
 # webpack
 node_modules/
 
+# Security
+application-oauth.yml
+
 .idea
 .project
 .classpath
