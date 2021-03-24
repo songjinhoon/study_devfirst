@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.devfirst.admin.epic.domain.Post;
 import com.devfirst.admin.epic.domain.PostRepository;
 import com.devfirst.admin.epic.domain.PostRepositorySupport;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class QuerydslTest {
         String content = "내용100";
         postRepository.save(Post.builder().title(title).content(content).build());
 
-        List<Post> posts = postRepositorySupport.findByTitle(title);
+        //List<Post> posts = postRepositorySupport.findByTitle(title);
+        List<Post> posts = postRepository.findByTitle(title);
 
         assertThat(posts.size()).isEqualTo(1);
         assertThat(posts.get(0).getContent()).isEqualTo(content);

@@ -2,7 +2,7 @@
 .gradle
 build/
 
-# Mapstruct
+# Mapstruct, Querydsl
 generated/
 
 # webpack
