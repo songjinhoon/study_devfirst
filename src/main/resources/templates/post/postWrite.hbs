@@ -1,0 +1,23 @@
+{{>layout/header}}
+
+    <div class="container spacer"></div>
+    <div class="container">
+        <form class="writeForm" method="post" action="/dev/post/api/save">
+            <div class="mb-3">
+                <label for="writeFormTitle" class="form-label">제목</label>
+                <input name="title" type="text" class="form-control" id="writeFormTitle" aria-describedby="writeFormTitleHelp">
+                <div id="writeFormTitleHelp" class="form-text">제목을 입력해주세요.</div>
+            </div>
+            <div class="mb-3">
+                <label for="writeFormContent" class="form-label">내용</label>
+                <textarea name="content" class="form-control" id="writeFormContent"></textarea>
+            </div>
+            <!--<div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>-->
+            <button type="submit" class="btn btn-primary">게시글 저장</button>
+        </form>
+    </div>
+
+{{>layout/footer}}

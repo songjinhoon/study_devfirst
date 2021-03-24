@@ -24,10 +24,18 @@ $(document).ready(function (){
     });*/
 });
 
-// 페이징처리
+// 페이징
 $('.pageDiv a').on('click', e => {
     const { currentTarget } = e;
     const pageNo = $(currentTarget).data('page');
     $('.searchForm').find('input[name="page"]').val(pageNo);
     $('.searchForm').submit();
+});
+// 조회
+$('.searchForm button.search').on('click', () => {
+   alert('조회버튼 클릭!') ;
+});
+// 게시글 작성
+$('.searchForm button.write').on('click', () => {
+   alert('작성버튼 클릭!');
 });

@@ -20,3 +20,9 @@
     font-size: 3px;
     color: #848484;
 }
+.container.spacer {
+    margin-top: 50px;
+}
+form button.write {
+    float: right;
+}
