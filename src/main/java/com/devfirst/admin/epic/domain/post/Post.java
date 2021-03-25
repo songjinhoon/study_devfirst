@@ -17,7 +17,7 @@ public class Post extends BaseTimeEntity {
     @Column(name = "M_POST_ID")
     private Long id;
 
-    @Column(name = "M_PnOST_TITLE")
+    @Column(name = "M_POST_TITLE")
     private String title;
 
     @Column(name = "M_POST_CONTENT")
