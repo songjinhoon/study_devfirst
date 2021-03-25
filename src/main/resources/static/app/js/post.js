@@ -28,14 +28,41 @@ $(document).ready(function (){
 $('.pageDiv a').on('click', e => {
     const { currentTarget } = e;
     const pageNo = $(currentTarget).data('page');
-    $('.searchForm').find('input[name="page"]').val(pageNo);
+    //$('.searchForm').find('input[name="page"]').val(pageNo);
+    $('.searchForm').find('input').each((index, item) => {
+        if($(item).attr('name') === 'page') {
+            $(item).val(pageNo);
+            return true; // continue
+        }
+        $(item).removeAttr('value');
+    });
     $('.searchForm').submit();
+});
+// 작성
+$('.searchForm button.write').on('click', e => {
+    e.preventDefault(); // or type="button"
+    window.location.href = `${location.protocol}//${location.hostname}:${location.port}/${contextPath}/post/write`;
+
 });
 // 조회
 $('.searchForm button.search').on('click', () => {
-   alert('조회버튼 클릭!') ;
+    $('.searchForm').find('input[name="page"]').val(1);
+    $('.searchForm').submit();
 });
-// 게시글 작성
-$('.searchForm button.write').on('click', () => {
-   alert('작성버튼 클릭!');
+// 저장
+$('.writeForm button.write').on('click', () => {
+    // 파일 처리를 위해서 임시로
+    const formData = new FormData();
+    formData.append('title', $('#writeFormTitle').val());
+    formData.append('content', $('#writeFormContent').val());
+    axios({
+        method: 'post',
+        url: `${contextPath}/post/api/save`,
+        data: formData,
+        headers: {'Content-Type': 'multipart/form-data'},
+    }).then(response => {
+        console.log(response.data);
+    }).catch(response => {
+        console.log(response);
+    });
 });

@@ -1,5 +1,6 @@
 package com.devfirst.admin.epic.config.render;
 
+import com.devfirst.admin.epic.common.PaginationInfo;
 import org.springframework.data.domain.Page;
 
 import java.text.MessageFormat;
@@ -21,11 +22,11 @@ public class PaginationRendererImpl implements PaginationRenderer{
     }
     // 추후에 Page를 다른타입으로 바꿔줘야한다.
     @Override
-    public String renderPagination(Page page) {
+    public String renderPagination(PaginationInfo paginationInfo) {
         int pageIndexSize = 5;
-        int totalPageCnt = page.getTotalPages();
-        int pageSize = page.getSize();
-        int currentPageNo = page.getNumber() + 1;
+        int totalPageCnt = paginationInfo.getTotalPageCnt();
+        int pageSize = paginationInfo.getPageable().getPageSize();
+        int currentPageNo = paginationInfo.getPageable().getPageNumber() + 1;
         int previousLabelPageNo;
         int nextLabelPageNo;
         if((currentPageNo % pageIndexSize) == 0){
@@ -39,7 +40,7 @@ public class PaginationRendererImpl implements PaginationRenderer{
         System.out.println("페이지 크기: " + pageSize);
         System.out.println("현재 페이지: " + currentPageNo);
         System.out.println("이전 페이지: " + previousLabelPageNo);
-        System.out.println("마지막 페이지: " + nextLabelPageNo);
+        System.out.println("다음 페이지: " + nextLabelPageNo);
 
         StringBuilder stringBuilder = new StringBuilder();
         if(currentPageNo > pageIndexSize) stringBuilder.append(MessageFormat.format(this.previousLabel, Integer.toString(previousLabelPageNo)));

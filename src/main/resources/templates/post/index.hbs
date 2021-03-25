@@ -6,10 +6,10 @@
             <input type="hidden" name="page" value="{{parameter.page}}" />
             <div class="row g-4">
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="제목" aria-label="제목">
+                    <input name="title" type="text" class="form-control" placeholder="제목" aria-label="제목" value="{{parameter.title}}">
                 </div>
                 <div class="col-sm">
-                    <input type="text" class="form-control" placeholder="내용" aria-label="내용">
+                    <input name="content" type="text" class="form-control" placeholder="내용" aria-label="내용" value="{{parameter.content}}">
                 </div>
                 <div class="col-sm-2">
                     <button class="btn btn-primary search">조회</button>
@@ -19,7 +19,6 @@
                 </div>
             </div>
         </form>
-
 	    {{>post/postList}}
 	</div>
 

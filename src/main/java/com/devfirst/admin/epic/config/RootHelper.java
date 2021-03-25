@@ -1,5 +1,6 @@
 package com.devfirst.admin.epic.config;
 
+import com.devfirst.admin.epic.common.PaginationInfo;
 import com.devfirst.admin.epic.config.render.PaginationRenderer;
 import com.github.jknack.handlebars.Handlebars;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,9 +24,9 @@ public class RootHelper {
 		return this.contextPath;
 	}
 
-	public Handlebars.SafeString pageProcess(Page page) {
-		if(page != null) {
-			return new Handlebars.SafeString(paginationRenderer.renderPagination(page));
+	public Handlebars.SafeString pageProcess(PaginationInfo paginationInfo) {
+		if(paginationInfo != null) {
+			return new Handlebars.SafeString(paginationRenderer.renderPagination(paginationInfo));
 		}
 		return null;
 	}

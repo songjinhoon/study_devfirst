@@ -9,7 +9,7 @@
     </tr>
     </thead>
     <tbody>
-    {{#map.posts}}
+    {{#posts}}
         <tr>
             <td>체크2</td>
             <td>{{title}}</td>
@@ -17,9 +17,9 @@
             <td>{{createdDate}}</td>
             <td>{{modifiedDate}}</td>
         </tr>
-    {{/map.posts}}
+    {{/posts}}
     </tbody>
 </table>
 <div class="pageDiv">
-    {{pageProcess map.pageInfo}}
+    {{pageProcess paginationInfo}}
 </div>

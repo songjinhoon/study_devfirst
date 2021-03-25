@@ -39,22 +39,18 @@ public class PostService {
         post.update(postRequestDto.getTitle(), postRequestDto.getContent());
         return PostMapper.INSTANCE.postToPostResponseDto(post);
     }
-    
-    public List<PostResponseDto> findBySearchParameter(final Pageable pageable) {
-    	Page<Post> result = postRepository.findAll(pageable);
-    	List<Post> posts = result.getContent();
-    	List<PostResponseDto> postsResponseDtos = PostMapper.INSTANCE.postsToPostResponseDtos(posts); 
-    	
-    	return postsResponseDtos;
-    }
-    
-    public ImmutableMap<String, Object> findAll(final Pageable pageable, SearchDto searchDto) {
-    	Page<Post> result = postRepository.findAll(pageable);
 
-    	ImmutableMap<String, Object> pageAndpostResponseDtos = ImmutableMap.<String, Object>builder()
-    			.put("posts", PostMapper.INSTANCE.postsToPostResponseDtos(result.getContent()))
-    			.put("pageInfo", result).build();
-
-    	return pageAndpostResponseDtos;
+    public Page<PostResponseDto> findAll(final Pageable pageable, final SearchDto searchDto) {
+        return postRepository.findBySearchDto(pageable, searchDto);
     }
+
+/*    public ImmutableMap<String, Object> findAll(final Pageable pageable, SearchDto searchDto) {
+        Page<Post> result = postRepository.findAll(pageable);
+
+        ImmutableMap<String, Object> pageAndpostResponseDtos = ImmutableMap.<String, Object>builder()
+                .put("posts", PostMapper.INSTANCE.postsToPostResponseDtos(result.getContent()))
+                .put("pageInfo", result).build();
+
+        return pageAndpostResponseDtos;
+    }*/
 }
