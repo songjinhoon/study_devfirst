@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 
 
@@ -29,7 +28,7 @@ public class User extends BaseTimeEntity {
 
     @Column(name = "M_USER_PICTURE")
     private String picture;
-/*
+
     @Enumerated(EnumType.STRING)
     @Column(name = "M_USER_ROLE")
     private Role role;
@@ -40,7 +39,7 @@ public class User extends BaseTimeEntity {
         this.email = email;
         this.picture = picture;
         this.role = role;
-    }*/
+    }
 
     public User update(String name, String picture) {
         this.name = name;

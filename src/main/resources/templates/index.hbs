@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="{{contextPath}}/css/common.css">
 </head>
 <body>
-    <p>메인페이지입니다.</p>
-    <a id="postMove" href="#">POST</a>
-
+    {{!-- <p>메인페이지입니다.</p>
+    <a id="postMove" href="#">POST</a> --}}
+    <div class="container spacer"></div>
+    <div class="container">
+        {{#sessionUser}}
+            <h1>환영합니다. {{sessionUser.name}}</h1>
+            <a href="{{contextPath}}/logout" class="btn btn-info active" role="button">Logout</a>
+            <a id="postMove" href="#">POST</a>
+        {{/sessionUser}}
+        {{^sessionUser}}
+            <h1>로그인이 필요합니다.</h1>
+            <a href="{{contextPath}}/oauth2/authorization/google" class="btn btn-primary active" role="button">Google Login</a>
+        {{/sessionUser}}
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="{{contextPath}}/app/dist/index.js"></script>

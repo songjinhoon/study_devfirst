@@ -7,8 +7,8 @@ spring:
       enabled: true
     livereload:
       enabled: true
-  freemarker:
-    cache: false
+  #freemarker:
+    #cache: false
   datasource:
     url: jdbc:h2:mem:testdb;MODE=mysql;
 

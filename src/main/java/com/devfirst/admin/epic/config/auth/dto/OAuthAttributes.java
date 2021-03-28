@@ -1,5 +1,7 @@
 package com.devfirst.admin.epic.config.auth.dto;
 
+import com.devfirst.admin.epic.domain.user.Role;
+import com.devfirst.admin.epic.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -23,5 +25,26 @@ public class OAuthAttributes {
         this.picture = picture;
     }
 
-    //추가..
+    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
+        return ofGoogle(userNameAttributeName, attributes);
+    }
+
+    public static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
+        return OAuthAttributes.builder()
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .name((String) attributes.get("name"))
+                .email((String) attributes.get("email"))
+                .picture((String) attributes.get("picture"))
+                .build();
+    }
+
+    public User toEntity() {
+        return User.builder()
+                .name(name) // this 키워드를 안써준 이유가 따로 있을까?
+                .email(email)
+                .picture(picture)
+                .role(Role.GUEST)
+                .build();
+    }
 }
