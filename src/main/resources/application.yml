@@ -9,6 +9,8 @@ spring:
       enabled: true
   #freemarker:
     #cache: false
+  session:
+    store-type: jdbc
   datasource:
     url: jdbc:h2:mem:testdb;MODE=mysql;
 
