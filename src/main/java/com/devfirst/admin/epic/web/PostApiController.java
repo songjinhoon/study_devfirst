@@ -14,8 +14,13 @@ public class PostApiController {
 
     private final PostService postService;
 
+    @GetMapping("/save")
+    public Long saveGet(PostRequestDto postRequestDto) {
+        return postService.save(postRequestDto);
+    }
+
     @PostMapping("/save")
-    public Long save(PostRequestDto postRequestDto, MultipartFile multipartFile) {
+    public Long save(@RequestBody PostRequestDto postRequestDto/*, MultipartFile multipartFile*/) {
         return postService.save(postRequestDto);
     }
 
