@@ -30,24 +30,25 @@ public class PostApiControllerTest {
     @Autowired
     private PostRepository postRepository;
 
-    @AfterAll
-    public void clean() throws Exception {
-        postRepository.deleteAll();
-    }
-    
     //한방메소드 만들자
     
     @Test
     @DisplayName("post save")
     public void test01() throws Exception {
-        PostRequestDto postRequestDto = PostRequestDto.builder().content("내용").title("제목").build();
+        String title = "테스트제목";
+        String content = "테스트내용";
+        PostRequestDto postRequestDto = PostRequestDto.builder()
+                .content(content)
+                .title(title)
+                .build();
+
         String url = "http://localhost:" + port + "/dev/post/api/save";
 
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, postRequestDto, Long.class);
-        Post post = postRepository.findAll().get(0);
+        Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElse(null);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(post.getTitle()).isEqualTo("제목");
+        assertThat(post.getContent()).isEqualTo(content);
     }
 
     @Test

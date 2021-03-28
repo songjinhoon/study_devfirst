@@ -41,7 +41,7 @@ $('.pageDiv a').on('click', e => {
 // 작성
 $('.searchForm button.write').on('click', e => {
     e.preventDefault(); // or type="button"
-    window.location.href = `${location.protocol}//${location.hostname}:${location.port}/${contextPath}/post/write`;
+    window.location.href = `${location.protocol}//${location.hostname}:${location.port}${contextPath}/post/write`;
 
 });
 // 조회

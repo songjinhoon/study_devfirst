@@ -4,6 +4,10 @@
     <div class="container">
         <form class="writeForm" method="post" action="/dev/post/api/save">
             <div class="mb-3">
+                <label for="writeFormFile" class="form-label">파일을 선택해주세요.</label>
+                <input name="multipartFile" class="form-control" type="file" id="writeFormFile">
+            </div>
+            <div class="mb-3">
                 <label for="writeFormTitle" class="form-label">제목</label>
                 <input name="title" type="text" class="form-control" id="writeFormTitle" aria-describedby="writeFormTitleHelp">
                 <div id="writeFormTitleHelp" class="form-text">제목을 입력해주세요.</div>
