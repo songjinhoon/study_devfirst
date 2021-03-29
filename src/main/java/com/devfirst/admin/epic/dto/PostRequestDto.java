@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Setter
 @Getter
@@ -14,6 +15,7 @@ public class PostRequestDto {
 	
 	private String title;
 	private String content;
+	private MultipartFile file;
 	
 	@Builder
 	public PostRequestDto(String title, String content) {

@@ -10,12 +10,17 @@ import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Service
@@ -24,7 +29,8 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long save(PostRequestDto postRequestDto) {
+    public Long save(PostRequestDto postRequestDto) throws IOException {
+        if(!postRequestDto.getFile().isEmpty()) fileProcess(postRequestDto.getFile());
         return postRepository.save(postRequestDto.toEntity()).getId();
     }
 
@@ -53,4 +59,20 @@ public class PostService {
 
         return pageAndpostResponseDtos;
     }*/
+
+    public void fileProcess(MultipartFile multipartFile) throws IOException {
+        System.out.println("::DEBUG:: " + multipartFile.getOriginalFilename() + " :: " + multipartFile.getSize() + " :: " + Arrays.toString(multipartFile.getBytes()));
+        String origFilename = multipartFile.getOriginalFilename();
+        /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+        String savePath = System.getProperty("user.dir") + "\\files";
+        /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+        if (!new File(savePath).exists()) {
+            boolean check = new File(savePath).mkdir();
+            if(!check) {
+                System.out.println("::DEBUG:: directory create fail" );
+            }
+        }
+        String filePath = savePath + "\\" + origFilename;
+        multipartFile.transferTo(new File(filePath));
+    }
 }

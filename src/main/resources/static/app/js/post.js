@@ -31,12 +31,13 @@ $('.searchForm button.search').on('click', () => {
     $('.searchForm').find('input[name="page"]').val(1);
     $('.searchForm').submit();
 });
-// 저장
+// 저장 -> 사실 비동기로 처리 안해도되지만, 비동기로 처리해보겠음. -> 비동기로 처리를 하더라도, form.submit을 쓴다면 name이 필요하지만 지금같은 경우는 name이 노필요, 그렇지만 추후를 위해 써놈
 $('.writeForm button.write').on('click', () => {
-    // 파일 처리는 추후에
     const formData = new FormData();
     formData.append('title', $('#writeFormTitle').val());
     formData.append('content', $('#writeFormContent').val());
+    formData.append('file', $('#writeFormFile')[0].files[0]);
+
     axios({
         method: 'post',
         url: `${contextPath}/post/api/save`,

@@ -5,7 +5,8 @@ import com.devfirst.admin.epic.dto.PostResponseDto;
 import com.devfirst.admin.epic.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
@@ -14,13 +15,13 @@ public class PostApiController {
 
     private final PostService postService;
 
-    @PostMapping("/save")
-    public Long save(PostRequestDto postRequestDto, MultipartFile multipartFile) {
+    @PostMapping("/save") //
+    public Long save(PostRequestDto postRequestDto) throws IOException {
         return postService.save(postRequestDto);
     }
 
     @PostMapping("/saveForJson")
-    public Long save(@RequestBody PostRequestDto postRequestDto) {
+    public Long saveJson(@RequestBody PostRequestDto postRequestDto) throws IOException {
         return postService.save(postRequestDto);
     };
 
