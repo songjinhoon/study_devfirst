@@ -50,8 +50,6 @@ public class PostApiControllerTest {
                 .apply(springSecurity())
                 .build();
     }
-
-    //한방메소드 만들자
     
     @Test
     @WithMockUser(roles = "USER")
