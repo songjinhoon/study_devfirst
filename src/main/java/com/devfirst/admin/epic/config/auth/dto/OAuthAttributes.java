@@ -59,7 +59,7 @@ public class OAuthAttributes {
                 .name(name) // this 키워드를 안써준 이유가 따로 있을까?
                 .email(email)
                 .picture(picture)
-                .role(Role.GUEST)
+                .role(Role.USER)
                 .build();
     }
 }

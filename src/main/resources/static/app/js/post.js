@@ -4,24 +4,6 @@ import axios from 'axios';
 const contextPath = document.getElementById('contextPathHolder').dataset.contextPath;
 
 $(document).ready(function (){
-/*    axios.post(`${contextPath}/post/list`, { page: 0 }).then(response => {
-        $('#postListTable').html(response.data);
-    });
-
-    $('#testThead').on('click', e => {
-       console.log('testThead Click..');
-    });*/
-
-    // 페이징처리 -> 이렇게 안됨.
-    /*$('#postListTable .pageDiv a').on('click', e => {
-        console.log('222222');
-        const { currentTarget } = e;
-        const pageNo = $(currentTarget).data('page');
-
-        axios.post(`${contextPath}/post/list`, { page: pageNo}).then(response => {
-            $('#postListTable').html(response.data);
-        });
-    });*/
 });
 
 // 페이징
@@ -51,7 +33,7 @@ $('.searchForm button.search').on('click', () => {
 });
 // 저장
 $('.writeForm button.write').on('click', () => {
-    // 파일 처리를 위해서 임시로
+    // 파일 처리는 추후에
     const formData = new FormData();
     formData.append('title', $('#writeFormTitle').val());
     formData.append('content', $('#writeFormContent').val());
@@ -65,4 +47,18 @@ $('.writeForm button.write').on('click', () => {
     }).catch(response => {
         console.log(response);
     });
+});
+// 이미지 첨부
+$('#writeFormImage').on('change', e => {
+    alert('뿅');
+    const { currentTarget } = e;
+    const result = $(currentTarget).result;
+    const dataUrl = $(currentTarget).files[0];
+    const imageFile = new FileReader();
+    imageFile.onload = () => {
+        const imageElement = document.createElement('image');
+        imageElement.setAttribute('src', result);
+        $('#writeFormContent').appendChild(imageElement);
+    };
+    imageFile.readAsDataURL(dataUrl);
 });
