@@ -14,15 +14,15 @@ public class PostApiController {
 
     private final PostService postService;
 
-    @GetMapping("/save")
-    public Long saveGet(PostRequestDto postRequestDto) {
+    @PostMapping("/save")
+    public Long save(PostRequestDto postRequestDto, MultipartFile multipartFile) {
         return postService.save(postRequestDto);
     }
 
-    @PostMapping("/save")
-    public Long save(@RequestBody PostRequestDto postRequestDto/*, MultipartFile multipartFile*/) {
+    @PostMapping("/saveForJson")
+    public Long save(@RequestBody PostRequestDto postRequestDto) {
         return postService.save(postRequestDto);
-    }
+    };
 
     @GetMapping("/find/{id}")
     public PostResponseDto find(@PathVariable Long id) {
