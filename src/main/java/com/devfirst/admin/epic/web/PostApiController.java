@@ -15,8 +15,9 @@ public class PostApiController {
 
     private final PostService postService;
 
-    @PostMapping("/save") //
+    @PostMapping("/save")
     public Long save(PostRequestDto postRequestDto) throws IOException {
+
         return postService.save(postRequestDto);
     }
 
