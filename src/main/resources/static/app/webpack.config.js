@@ -20,13 +20,12 @@ module.exports = {
             "**": "http://localhost:9980"
         }
     },*/
-    // 의존성의 시작점
     entry: {
-        index: "./js/index.js", /* 상대경로 */
+        index: './js/index.js',
 		dashboard: './js/dashboard.js',
-		post: './js/post.js'
+		post: './js/post.js',
+        statistics: './js/statistics.js'
     },
-    // 번들링 된 결과물이 위치하는 곳
     output: {
         filename: "[name].js",
         path: path.resolve(__dirname, './dist'), /* 현재 프로젝트 디렉토리에서 ../dist에 위치 */

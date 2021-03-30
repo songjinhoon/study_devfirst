@@ -17,7 +17,8 @@
         {{#sessionUser}}
             <h1>환영합니다. {{sessionUser.name}}</h1>
             <a href="{{contextPath}}/logout" class="btn btn-info active" role="button">Logout</a>
-            <a id="postMove" href="#">POST</a>
+            <a id="postMove" href="#">게시판</a>
+            <a id="statistics" href="#">통계</a>
         {{/sessionUser}}
         {{^sessionUser}}
             <h1>로그인이 필요합니다.</h1>
