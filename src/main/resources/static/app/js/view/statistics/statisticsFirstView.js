@@ -1,11 +1,12 @@
 import * as echarts from 'echarts';
+import $ from "jquery";
 
 export default class statisticsFirstView {
 
     init() {
-        let chartDom = document.getElementById('statisticsFirstArea');
-        let myChart = echarts.init(chartDom);
-        let option = {
+        const chartDom = document.getElementById('statisticsFirstArea');
+        const myChart = echarts.init(chartDom);
+        const option = {
             xAxis: {
                 type: 'category',
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -23,5 +24,7 @@ export default class statisticsFirstView {
             }]
         };
         option && myChart.setOption(option);
+        const container = $('#statisticsArea');
+        container.append(myChart);
     }
 };
