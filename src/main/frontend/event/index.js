@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import axios from 'axios';
 
 const contextPath = document.getElementById('contextPathHolder').dataset.contextPath;
 

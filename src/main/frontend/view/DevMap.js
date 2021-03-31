@@ -11,14 +11,14 @@ const VWORLD_SATELLITE_TILE_URL = 'http://xdworld.vworld.kr:8080/2d/Satellite/se
 const VWORLD_STREET_TILE_URL = 'http://xdworld.vworld.kr:8080/2d/Base/service/{z}/{x}/{y}.png';
 
 export default class DevMap {
-	constructor(props) {
-		const { target } = props;
-		this.map = this.intro(target);
-		this.addVectorLayer();
-	}
-	
-	intro(target) {
-		const mapElement = document.getElementById(target);
+    constructor(props) {
+        const { target } = props;
+        this.map = this.intro(target);
+        this.addVectorLayer();
+    }
+
+    intro(target) {
+        const mapElement = document.getElementById(target);
         const baseMapUrl = "http://xdworld.vworld.kr:8080/2d/Base/service/{z}/{x}/{y}.png";
         const baseLayer = new Tile({
             id: "baseLayer",
@@ -42,13 +42,13 @@ export default class DevMap {
             view: new View(viewOption)
         };
         return new Map(olMapOptions);
-	}
-	
-	addVectorLayer() {
-		const vectorLayer = new VectorLayer({
-    		id: 'vectorLayer',
-    		source: new VectorSource({wrapX: false})
-    	});
-    	this.map.addLayer(vectorLayer);
-	}
+    }
+
+    addVectorLayer() {
+        const vectorLayer = new VectorLayer({
+            id: 'vectorLayer',
+            source: new VectorSource({wrapX: false})
+        });
+        this.map.addLayer(vectorLayer);
+    }
 };

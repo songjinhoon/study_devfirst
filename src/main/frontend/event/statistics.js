@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import axios from 'axios';
-import StatisticsFirstView from "./view/statistics/statisticsFirstView";
+import StatisticsFirstView from "../view/statistics/statisticsFirstView";
 
 $(document).ready(() => {
 

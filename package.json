@@ -1,0 +1,43 @@
+{
+  "name": "devsecond",
+  "version": "1.0.0",
+  "description": "project",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack-dev-server --env=development",
+    "prod": "webpack --env=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/songjinhoon/devfirst.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/songjinhoon/devfirst/issues"
+  },
+  "homepage": "https://github.com/songjinhoon/devfirst#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.0",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^1.4.0",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.7.1"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "echarts": "^5.0.2",
+    "jquery": "^3.6.0",
+    "ol": "^6.5.0",
+    "slick-carousel": "^1.8.1"
+  }
+}

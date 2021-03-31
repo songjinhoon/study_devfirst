@@ -20,7 +20,7 @@ generated/
 
 # webpack
 node_modules/
-dist/
+out/
 
 # Security
 application-oauth.yml
