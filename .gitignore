@@ -1,3 +1,16 @@
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
 # Gradle
 .gradle
 build/
@@ -7,15 +20,22 @@ generated/
 
 # webpack
 node_modules/
+dist/
 
 # Security
 application-oauth.yml
 
-.idea
+# Java annotation processor (APT)
+.factorypath
+
+# Annotation Processing
+.apt_generated/
+.apt_generated_test/
+
+# Application ignore list
 .project
 .classpath
 .settings/
 bin/
-.apt_generated/
-.factorypath
 files/
+.idea
