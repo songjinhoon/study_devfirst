@@ -14,5 +14,4 @@ public class PostResponseDto {
 	private Long id;
 	private String title;
 	private String content;
-	private SessionUser sessionUser;
 }
