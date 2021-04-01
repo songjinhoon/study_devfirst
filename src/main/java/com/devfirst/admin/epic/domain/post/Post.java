@@ -1,6 +1,7 @@
 package com.devfirst.admin.epic.domain.post;
 
 import com.devfirst.admin.epic.domain.BaseTimeEntity;
+import com.devfirst.admin.epic.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,6 +17,10 @@ public class Post extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "M_POST_ID")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "M_USER_ID")
+    private User user;
 
     @Column(name = "M_POST_TITLE")
     private String title;
