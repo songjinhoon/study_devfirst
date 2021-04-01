@@ -1,7 +1,10 @@
 package com.devfirst.admin.epic.web.apicontroller;
 
+import com.devfirst.admin.epic.config.auth.dto.SessionUser;
 import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.post.PostRepository;
+import com.devfirst.admin.epic.domain.user.Role;
+import com.devfirst.admin.epic.domain.user.User;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,21 +62,25 @@ public class PostApiControllerTest {
     
     @Test
     @WithMockUser(roles = "USER")
-    @DisplayName("PostApiController.save()")
+    @DisplayName("save")
     public void test01() throws Exception {
+        long userId = 1;
         String title = "테스트제목";
         String content = "테스트내용";
         String url = "/post/api/save";
 
         mvc.perform(post(url)
             .param("title", title)
-            .param("content", content))
-                //.andExpect(content().string("")
-            .andExpect(status().isOk());
+            .param("content", content)
+            .param("userId", String.valueOf(userId)))
+                .andExpect(status().isOk());
 
         Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElseThrow(NoSuchElementException::new);
         assertThat(post.getTitle()).isEqualTo(title);
         assertThat(post.getContent()).isEqualTo(content);
+        //잠시대기
+        /*System.out.println("::DEUBG:: " + post.getUser().getId());*/
+        /*System.out.println("::DEUBG:: " + post.getUser().getName());*/
     }
 
     @Test

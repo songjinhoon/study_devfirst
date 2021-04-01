@@ -3,6 +3,7 @@ package com.devfirst.admin.epic.service;
 import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.post.PostRepository;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
+import com.devfirst.admin.epic.domain.user.UserRepository;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
 import com.devfirst.admin.epic.dto.SearchDto;
@@ -12,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,13 +27,18 @@ public class PostService {
 
     private final PostRepository postRepository;
 
+    private final UserRepository userRepository;
+
     @Transactional
     public Long save(PostRequestDto postRequestDto) throws IOException {
         Optional<MultipartFile> fileCheck = Optional.ofNullable(postRequestDto.getFile());
         if(fileCheck.isPresent()) {
             fileProcess(fileCheck.get());
         }
-        return postRepository.save(postRequestDto.toEntity()).getId();
+        Post post = postRequestDto.toEntity();
+        post.settingUser(userRepository.findById(postRequestDto.getUserId()).orElseThrow(NoSuchElementException::new));
+
+        return postRepository.save(post).getId();
     }
 
     public PostResponseDto findById(final Long id) {

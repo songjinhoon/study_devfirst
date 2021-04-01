@@ -38,4 +38,8 @@ public class Post extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+
+    public void settingUser(User user) {
+        this.user = user;
+    }
 }
