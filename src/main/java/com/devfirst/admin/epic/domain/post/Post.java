@@ -29,7 +29,8 @@ public class Post extends BaseTimeEntity {
     private String content;
 
     @Builder
-    public Post(String title, String content) {
+    public Post(String title, String content, User user) {
+        this.user = user;
         this.title = title;
         this.content = content;
     }
@@ -37,9 +38,5 @@ public class Post extends BaseTimeEntity {
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
-    }
-
-    public void settingUser(User user) {
-        this.user = user;
     }
 }

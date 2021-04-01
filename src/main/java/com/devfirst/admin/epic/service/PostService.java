@@ -3,6 +3,7 @@ package com.devfirst.admin.epic.service;
 import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.post.PostRepository;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
+import com.devfirst.admin.epic.domain.user.User;
 import com.devfirst.admin.epic.domain.user.UserRepository;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
@@ -30,15 +31,14 @@ public class PostService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long save(PostRequestDto postRequestDto) throws IOException {
+    public long save(PostRequestDto postRequestDto) throws IOException {
         Optional<MultipartFile> fileCheck = Optional.ofNullable(postRequestDto.getFile());
         if(fileCheck.isPresent()) {
             fileProcess(fileCheck.get());
         }
-        Post post = postRequestDto.toEntity();
-        post.settingUser(userRepository.findById(postRequestDto.getUserId()).orElseThrow(NoSuchElementException::new));
-
-        return postRepository.save(post).getId();
+        User user = userRepository.findById(postRequestDto.getUserId()).orElseThrow(NoSuchElementException::new);
+        Post post = postRepository.save(postRequestDto.toEntity(user));
+        return post.getId();
     }
 
     public PostResponseDto findById(final Long id) {

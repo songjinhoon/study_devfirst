@@ -26,8 +26,9 @@ public class PostRequestDto {
         this.content = content;
     }
 
-    public Post toEntity() {
+    public Post toEntity(User user) {
         return Post.builder()
+				.user(user)
                 .title(title)
                 .content(content)
                 .build();

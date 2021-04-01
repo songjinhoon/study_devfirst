@@ -30,11 +30,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // JPA WEB TEST
+@SpringBootTest/*(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // JPA WEB TEST*/
 public class PostApiControllerTest {
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+    /*@Autowired
+    private TestRestTemplate restTemplate;*/
 
     @Autowired
     private PostRepository postRepository;
@@ -42,8 +42,8 @@ public class PostApiControllerTest {
     @Autowired
     private WebApplicationContext context;
 
-    @LocalServerPort
-    private int port;
+    /*@LocalServerPort
+    private int port;*/
 
     private MockMvc mvc;
 
@@ -78,7 +78,7 @@ public class PostApiControllerTest {
         Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElseThrow(NoSuchElementException::new);
         assertThat(post.getTitle()).isEqualTo(title);
         assertThat(post.getContent()).isEqualTo(content);
-        //잠시대기
+
         /*System.out.println("::DEUBG:: " + post.getUser().getId());*/
         /*System.out.println("::DEUBG:: " + post.getUser().getName());*/
     }
@@ -87,10 +87,12 @@ public class PostApiControllerTest {
     @WithMockUser(roles = "USER")
     @DisplayName("PostApiController.saveJson()")
     public void test02() throws Exception {
+        long userId = 1;
         String title = "테스트제목";
         String content = "테스트내용";
         String url = "/post/api/saveForJson";
         PostRequestDto postRequestDto = PostRequestDto.builder()
+                .userId(userId)
                 .title(title)
                 .content(content)
                 .build();
@@ -108,11 +110,10 @@ public class PostApiControllerTest {
     @WithMockUser(roles = "USER")
     @DisplayName("find")
     public void test03() throws Exception {
-        long id = 1;
-        String url = "/post/api/find";
+        String url = "/post/api/find/1";
         Post post = postRepository.findAll().stream().filter(data -> data.getId() == 1).findFirst().orElseThrow(NoSuchElementException::new);
 
-        mvc.perform(get(url + "/" + id))
+        mvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(1))
                 .andExpect(jsonPath("title").value(post.getTitle()))

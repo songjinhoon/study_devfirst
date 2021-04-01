@@ -1,5 +1,6 @@
 package com.devfirst.admin.epic.web;
 
+import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
 import com.devfirst.admin.epic.service.PostService;
@@ -16,12 +17,12 @@ public class PostApiController {
     private final PostService postService;
 
     @PostMapping("/save")
-    public Long save(PostRequestDto postRequestDto) throws IOException {
+    public long save(PostRequestDto postRequestDto) throws IOException {
         return postService.save(postRequestDto);
     }
 
     @PostMapping("/saveForJson")
-    public Long saveJson(@RequestBody PostRequestDto postRequestDto) throws IOException {
+    public long saveJson(@RequestBody PostRequestDto postRequestDto) throws IOException {
         return postService.save(postRequestDto);
     };
 
