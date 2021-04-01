@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +31,10 @@ public class PostService {
 
     @Transactional
     public Long save(PostRequestDto postRequestDto) throws IOException {
-        if(!postRequestDto.getFile().isEmpty()) fileProcess(postRequestDto.getFile());
+        Optional<MultipartFile> fileCheck = Optional.ofNullable(postRequestDto.getFile());
+        if(fileCheck.isPresent()) {
+            fileProcess(fileCheck.get());
+        }
         return postRepository.save(postRequestDto.toEntity()).getId();
     }
 

@@ -17,7 +17,6 @@ public class PostApiController {
 
     @PostMapping("/save")
     public Long save(PostRequestDto postRequestDto) throws IOException {
-
         return postService.save(postRequestDto);
     }
 
@@ -32,7 +31,7 @@ public class PostApiController {
     }
 
     @PostMapping("/update/{id}")
-    public PostResponseDto find(@RequestBody PostRequestDto postRequestDto, @PathVariable Long id) {
+    public PostResponseDto update(@RequestBody PostRequestDto postRequestDto, @PathVariable Long id) {
         return postService.update(postRequestDto, id);
     }
 }

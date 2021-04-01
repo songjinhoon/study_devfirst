@@ -23,19 +23,9 @@ public class PostController {
 	
 	private final PostService postService;
 
-/*	@GetMapping("/list")
-	public String getIndex(SearchDto searchDto, Model model) {
-		System.out.println("?");
-		PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 4, Sort.Direction.ASC, "id");
-		model.addAttribute("map", postService.findAll(pageRequest, searchDto));
-		model.addAttribute("parameter", searchDto);
-		return "/post/index";
-	}*/
 	@GetMapping("/list")
-	public String getIndex(SearchDto searchDto, Model model) {
-		System.out.println("?");
-		System.out.println(searchDto.getTitle());
-		PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 4, Sort.Direction.ASC, "id");
+	public String index(SearchDto searchDto, Model model) {
+		PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 10, Sort.Direction.ASC, "id");
 		Page<PostResponseDto> result = postService.findAll(pageRequest, searchDto);
 		PaginationInfo paginationInfo = PaginationInfo.builder()
 				.totalPageCnt(result.getTotalPages())
@@ -48,8 +38,16 @@ public class PostController {
 	}
 
 	@GetMapping("/write")
-	public String getWriteForm() {
-		System.out.println("??");
+	public String postWrite() {
 		return "/post/postWrite";
 	}
+
+	/*	@GetMapping("/list")
+	public String getIndex(SearchDto searchDto, Model model) {
+		System.out.println("?");
+		PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 4, Sort.Direction.ASC, "id");
+		model.addAttribute("map", postService.findAll(pageRequest, searchDto));
+		model.addAttribute("parameter", searchDto);
+		return "/post/index";
+	}*/
 }

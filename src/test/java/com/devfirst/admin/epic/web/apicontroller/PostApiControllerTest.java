@@ -1,4 +1,4 @@
-package com.devfirst.admin.epic.web;
+package com.devfirst.admin.epic.web.apicontroller;
 
 import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.post.PostRepository;
@@ -16,6 +16,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -51,14 +52,14 @@ public class PostApiControllerTest {
                 .build();
     }
 
-    @AfterEach
+    /*@AfterEach
     public void cleanUp() {
         postRepository.deleteAll();
-    }
+    }*/
     
     @Test
     @WithMockUser(roles = "USER")
-    @DisplayName("post save")
+    @DisplayName("PostApiController.save()")
     public void test01() throws Exception {
         String title = "테스트제목";
         String content = "테스트내용";
@@ -67,6 +68,7 @@ public class PostApiControllerTest {
         mvc.perform(post(url)
             .param("title", title)
             .param("content", content))
+                //.andExpect(content().string("")
             .andExpect(status().isOk());
 
         Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElseThrow(NoSuchElementException::new);
@@ -75,44 +77,63 @@ public class PostApiControllerTest {
     }
 
     @Test
-    @WithMockUser("USER")
-    @DisplayName("post saveForJson")
-    public void test011() throws Exception {
+    @WithMockUser(roles = "USER")
+    @DisplayName("PostApiController.saveJson()")
+    public void test02() throws Exception {
         String title = "테스트제목";
         String content = "테스트내용";
+        String url = "/post/api/saveForJson";
         PostRequestDto postRequestDto = PostRequestDto.builder()
                 .title(title)
                 .content(content)
                 .build();
-        String url = "/post/api/saveForJson";
 
         mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(postRequestDto)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());;
 
         Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElseThrow(NoSuchElementException::new);
         assertThat(post.getTitle()).isEqualTo(title);
         assertThat(post.getContent()).isEqualTo(content);
     }
 
-    /* 여기부터 다시 수정들어가야함 */
-
     @Test
-    @DisplayName("post get")
-    public void test02() throws Exception {
-        PostRequestDto postRequestDto = PostRequestDto.builder().title("제목").content("내용").build();
-        Post post = postRequestDto.toEntity();
-        postRepository.save(post);
-        String url = "http://localhost:" + port + "/dev/post/api/find/1";
+    @WithMockUser(roles = "USER")
+    @DisplayName("find")
+    public void test03() throws Exception {
+        long id = 1;
+        String url = "/post/api/find";
+        Post post = postRepository.findAll().stream().filter(data -> data.getId() == 1).findFirst().orElseThrow(NoSuchElementException::new);
 
-        HttpEntity<PostRequestDto> requestEntity = new HttpEntity<>(postRequestDto);
-        ResponseEntity<PostResponseDto> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, PostResponseDto.class);
-
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        mvc.perform(get(url + "/" + id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").value(1))
+                .andExpect(jsonPath("title").value(post.getTitle()))
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
+    @WithMockUser(roles = "USER")
+    @DisplayName("update")
+    public void test04() throws Exception {
+        String title = "제목업데이트";
+        String content = "타이틀업데이트";
+        long id = 1;
+        String url = "/post/api/update/" + id;
+        PostRequestDto postRequestDto = PostRequestDto.builder()
+                .title(title)
+                .content(content)
+                .build();
+
+        mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(postRequestDto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").value(id))
+                .andExpect(jsonPath("title").value(title))
+                .andDo(MockMvcResultHandlers.print());
+    }
+/*    @Test
     @DisplayName("post update")
-    public void test03() throws Exception {
+    public void test04() throws Exception {
         Post post = postRepository.save(Post.builder().title("제목1").content("내용1").build());
         Long id = post.getId();
         String url = "http://localhost:" + port + "/dev/post/api/update/" + id;
@@ -125,5 +146,5 @@ public class PostApiControllerTest {
         Post updatedPost = postRepository.findById(id).orElse(null);
         assertThat(updatedPost.getTitle()).isEqualTo("제목2");
         assertThat(updatedPost.getContent()).isEqualTo("내용2");
-    }
+    }*/
 }
