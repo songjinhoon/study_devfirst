@@ -73,19 +73,20 @@ public class PostApiControllerTest {
             .param("title", title)
             .param("content", content)
             .param("userId", String.valueOf(userId)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("title").value(title))
+                .andExpect(jsonPath("content").value(content))
+                .andExpect(jsonPath("user.id").value(userId))
+                .andDo(MockMvcResultHandlers.print());
 
         Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElseThrow(NoSuchElementException::new);
         assertThat(post.getTitle()).isEqualTo(title);
         assertThat(post.getContent()).isEqualTo(content);
-
-        /*System.out.println("::DEUBG:: " + post.getUser().getId());*/
-        /*System.out.println("::DEUBG:: " + post.getUser().getName());*/
     }
 
     @Test
     @WithMockUser(roles = "USER")
-    @DisplayName("PostApiController.saveJson()")
+    @DisplayName("saveJson")
     public void test02() throws Exception {
         long userId = 1;
         String title = "테스트제목";
@@ -99,11 +100,10 @@ public class PostApiControllerTest {
 
         mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(postRequestDto)))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("title").value(title))
+                .andExpect(jsonPath("content").value(content))
+                .andExpect(jsonPath("user.id").value(userId))
                 .andDo(MockMvcResultHandlers.print());;
-
-        Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElseThrow(NoSuchElementException::new);
-        assertThat(post.getTitle()).isEqualTo(title);
-        assertThat(post.getContent()).isEqualTo(content);
     }
 
     @Test
@@ -111,12 +111,10 @@ public class PostApiControllerTest {
     @DisplayName("find")
     public void test03() throws Exception {
         String url = "/post/api/find/1";
-        Post post = postRepository.findAll().stream().filter(data -> data.getId() == 1).findFirst().orElseThrow(NoSuchElementException::new);
 
         mvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(1))
-                .andExpect(jsonPath("title").value(post.getTitle()))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -126,17 +124,20 @@ public class PostApiControllerTest {
     public void test04() throws Exception {
         String title = "제목업데이트";
         String content = "타이틀업데이트";
+        long userId = 1;
         long id = 1;
         String url = "/post/api/update/" + id;
         PostRequestDto postRequestDto = PostRequestDto.builder()
                 .title(title)
                 .content(content)
+                .userId(userId)
                 .build();
 
         mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(postRequestDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(id))
                 .andExpect(jsonPath("title").value(title))
+                .andExpect(jsonPath("user.id").value(userId))
                 .andDo(MockMvcResultHandlers.print());
     }
 /*    @Test

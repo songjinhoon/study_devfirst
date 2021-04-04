@@ -17,12 +17,12 @@ public class PostApiController {
     private final PostService postService;
 
     @PostMapping("/save")
-    public long save(PostRequestDto postRequestDto) throws IOException {
+    public PostResponseDto save(PostRequestDto postRequestDto) throws IOException {
         return postService.save(postRequestDto);
     }
 
     @PostMapping("/saveForJson")
-    public long saveJson(@RequestBody PostRequestDto postRequestDto) throws IOException {
+    public PostResponseDto saveJson(@RequestBody PostRequestDto postRequestDto) throws IOException {
         return postService.save(postRequestDto);
     };
 

@@ -1,5 +1,6 @@
 package com.devfirst.admin.epic.service;
 
+import com.devfirst.admin.epic.config.auth.dto.SessionUser;
 import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.post.PostRepository;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
@@ -31,26 +32,36 @@ public class PostService {
     private final UserRepository userRepository;
 
     @Transactional
-    public long save(PostRequestDto postRequestDto) throws IOException {
+    public PostResponseDto save(PostRequestDto postRequestDto) throws IOException {
         Optional<MultipartFile> fileCheck = Optional.ofNullable(postRequestDto.getFile());
         if(fileCheck.isPresent()) {
             fileProcess(fileCheck.get());
         }
         User user = userRepository.findById(postRequestDto.getUserId()).orElseThrow(NoSuchElementException::new);
         Post post = postRepository.save(postRequestDto.toEntity(user));
-        return post.getId();
+        PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
+        postResponseDto.setUser(new SessionUser(user));
+        return postResponseDto;
     }
 
     public PostResponseDto findById(final Long id) {
-        Post post = postRepository.findById(id).orElse(null);
-        return PostMapper.INSTANCE.postToPostResponseDto(post);
+        Post post = postRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
+        postResponseDto.setUser(new SessionUser(post.getUser()));
+        return postResponseDto;
     }
 
     @Transactional
     public PostResponseDto update(PostRequestDto postRequestDto, final Long id) {
-        Post post = postRepository.findById(id).orElse(null);
-        post.update(postRequestDto.getTitle(), postRequestDto.getContent());
-        return PostMapper.INSTANCE.postToPostResponseDto(post);
+        Post post = postRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        if(post.getUser().getId() == postRequestDto.getUserId()) {
+            post.update(postRequestDto.getTitle(), postRequestDto.getContent());
+        }else {
+            //작업해야함
+        }
+        PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
+        postResponseDto.setUser(new SessionUser(post.getUser()));
+        return postResponseDto;
     }
 
     public Page<PostResponseDto> findAll(final Pageable pageable, final SearchDto searchDto) {
