@@ -1,6 +1,7 @@
 package com.devfirst.admin.epic.service;
 
 import com.devfirst.admin.epic.config.auth.dto.SessionUser;
+import com.devfirst.admin.epic.domain.mapper.UserMapper;
 import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.post.PostRepository;
 import com.devfirst.admin.epic.domain.mapper.PostMapper;
@@ -40,14 +41,14 @@ public class PostService {
         User user = userRepository.findById(postRequestDto.getUserId()).orElseThrow(NoSuchElementException::new);
         Post post = postRepository.save(postRequestDto.toEntity(user));
         PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
-        postResponseDto.setUser(new SessionUser(user));
+        postResponseDto.setUser(UserMapper.INSTANCE.userToSessionUser(user));
         return postResponseDto;
     }
 
     public PostResponseDto findById(final Long id) {
         Post post = postRepository.findById(id).orElseThrow(NoSuchElementException::new);
         PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
-        postResponseDto.setUser(new SessionUser(post.getUser()));
+        postResponseDto.setUser(UserMapper.INSTANCE.userToSessionUser(post.getUser()));
         return postResponseDto;
     }
 
@@ -60,7 +61,7 @@ public class PostService {
             //작업해야함
         }
         PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
-        postResponseDto.setUser(new SessionUser(post.getUser()));
+        postResponseDto.setUser(UserMapper.INSTANCE.userToSessionUser(post.getUser()));
         return postResponseDto;
     }
 

@@ -2,23 +2,20 @@ package com.devfirst.admin.epic.config.auth.dto;
 
 import com.devfirst.admin.epic.domain.user.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Setter
 @Getter
+@NoArgsConstructor
 public class SessionUser implements Serializable {
 
     private Long id;
     private String name;
     private String email;
     private String picture;
-
-    public SessionUser(User user) {
-        this.id = user.getId();
-        this.name = user.getName();
-        this.email = user.getEmail();
-        this.picture = user.getPicture();
-    }
 }
 /*
 * User class를 session에 저장하지 않고 별도의 SessionUser를 만든 이유는, User class가 Entity이기 때문이다.

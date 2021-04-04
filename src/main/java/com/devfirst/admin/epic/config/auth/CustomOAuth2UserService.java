@@ -2,6 +2,7 @@ package com.devfirst.admin.epic.config.auth;
 
 import com.devfirst.admin.epic.config.auth.dto.OAuthAttributes;
 import com.devfirst.admin.epic.config.auth.dto.SessionUser;
+import com.devfirst.admin.epic.domain.mapper.UserMapper;
 import com.devfirst.admin.epic.domain.user.User;
 import com.devfirst.admin.epic.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
         User user = saveOrUpdate(attributes);
 
-        httpSession.setAttribute("user", new SessionUser(user)); // User클래스는 entity이므로 직렬화 클래스를 별도로 만들었음.
+        httpSession.setAttribute("user", UserMapper.INSTANCE.userToSessionUser(user)); // User클래스는 entity이므로 직렬화 클래스를 별도로 만들었음.
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRole().getKey())),
