@@ -20,7 +20,8 @@ generated/
 
 # webpack
 node_modules/
-out/
+/app/out/
+package-lock.json
 
 # Security
 application-oauth.yml
