@@ -16,7 +16,7 @@ import com.devfirst.admin.epic.dto.PostResponseDto;
 public interface PostMapper {
 	PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);
 
-	@Mapping(target = "user", ignore = true)
+	//@Mapping(target = "user", ignore = true)
 	PostResponseDto postToPostResponseDto(Post post);
 
 	List<PostResponseDto> postsToPostResponseDtos(List<Post> posts);

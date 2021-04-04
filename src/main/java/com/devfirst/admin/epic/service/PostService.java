@@ -41,15 +41,12 @@ public class PostService {
         User user = userRepository.findById(postRequestDto.getUserId()).orElseThrow(NoSuchElementException::new);
         Post post = postRepository.save(postRequestDto.toEntity(user));
         PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
-        postResponseDto.setUser(UserMapper.INSTANCE.userToSessionUser(user));
         return postResponseDto;
     }
 
     public PostResponseDto findById(final Long id) {
         Post post = postRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
-        postResponseDto.setUser(UserMapper.INSTANCE.userToSessionUser(post.getUser()));
-        return postResponseDto;
+        return PostMapper.INSTANCE.postToPostResponseDto(post);
     }
 
     @Transactional
@@ -60,9 +57,7 @@ public class PostService {
         }else {
             //작업해야함
         }
-        PostResponseDto postResponseDto = PostMapper.INSTANCE.postToPostResponseDto(post);
-        postResponseDto.setUser(UserMapper.INSTANCE.userToSessionUser(post.getUser()));
-        return postResponseDto;
+        return PostMapper.INSTANCE.postToPostResponseDto(post);
     }
 
     public Page<PostResponseDto> findAll(final Pageable pageable, final SearchDto searchDto) {
