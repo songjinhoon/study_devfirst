@@ -1,6 +1,7 @@
 package com.devfirst.admin.epic.domain.post;
 
-import com.devfirst.admin.epic.dto.PostResponseDto;
+import com.devfirst.admin.epic.domain.user.QUser;
+import com.devfirst.admin.epic.dto.QPostResponseDto;
 import com.devfirst.admin.epic.dto.SearchDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 import static com.devfirst.admin.epic.domain.post.QPost.post;
-import static com.querydsl.jpa.JPAExpressions.select;
 
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepositoryCustom {
@@ -30,11 +30,12 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
     }
 
     @Override
-    public Page<PostResponseDto> findBySearchDto(Pageable pageable, SearchDto searchDto) {
-        QueryResults<PostResponseDto> result = queryFactory.select(Projections.bean(PostResponseDto.class,
+    public Page<QPostResponseDto> findBySearchDto(Pageable pageable, SearchDto searchDto) {
+        QueryResults<QPostResponseDto> result = queryFactory.select(Projections.bean(QPostResponseDto.class,
                 post.id,
                 post.title,
-                post.content))
+                post.content,
+                post.user.id.as("userId")))
                 .from(post)
                 .where(eqTitle(searchDto.getTitle()), eqContent(searchDto.getContent()))
                 .offset(pageable.getOffset())
@@ -54,5 +55,9 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
             return null;
         }
         return post.content.contains(content);
+    }
+
+    private void testing(QUser quser) {
+
     }
 }

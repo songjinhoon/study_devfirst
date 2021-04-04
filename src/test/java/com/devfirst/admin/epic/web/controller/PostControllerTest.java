@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -32,7 +33,7 @@ public class PostControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    @DisplayName("PostController.index()")
+    @DisplayName("index")
     public void test01() throws Exception {
         int page = 1;
         String title = "테스트제목";
@@ -48,12 +49,13 @@ public class PostControllerTest {
                 /*.andExpect(content().string("Hello World")) // response body에 문자열이 포함되있니*/
                 //.andExpect(model().attribute("posts", IsCollectionWithSize.hasSize(10)))
                 .andExpect(view().name(expectViewName))
-                .andExpect(model().attributeExists("posts"));
+                .andExpect(model().attributeExists("posts"))
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
     @WithMockUser(roles = "USER")
-    @DisplayName("PostController.postWrite()")
+    @DisplayName("postWrite")
     public void test02() throws Exception {
         String url = "/post/write";
         String expectViewName = "/post/postWrite";

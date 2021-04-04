@@ -4,6 +4,7 @@ import com.devfirst.admin.epic.domain.post.Post;
 import com.devfirst.admin.epic.domain.post.PostRepository;
 
 import com.devfirst.admin.epic.dto.PostResponseDto;
+import com.devfirst.admin.epic.dto.QPostResponseDto;
 import com.devfirst.admin.epic.dto.SearchDto;
 import com.querydsl.core.QueryResults;
 import org.junit.jupiter.api.DisplayName;
@@ -27,25 +28,15 @@ public class PostRepositoryTest {
     Post post;
 
     @Test
-    @DisplayName("post save and get")
+    @DisplayName("findBySearchDto")
     public void test01() throws Exception {
-        postRepository.save(post);
-        Post post = postRepository.findAll().get(0);
-        assertThat(post.getId()).isEqualTo(1);
-        assertThat(post.getTitle()).isEqualTo("제목");
-    }
-
-    @Test
-    @DisplayName("post search test")
-    public void test02() throws Exception {
         SearchDto searchDto = new SearchDto();
-        searchDto.setTitle("제목50");
-        searchDto.setContent("내용");
-        PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 4, Sort.Direction.ASC, "id");
-
-        Page<PostResponseDto> result = postRepository.findBySearchDto(pageRequest, searchDto);
-
+        PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 10, Sort.Direction.ASC, "id");
+        Page<QPostResponseDto> results = postRepository.findBySearchDto(pageRequest, searchDto);
+        List<QPostResponseDto> posts = results.getContent();
         System.out.println("::DEBUG::");
-        System.out.println(result.getContent());
+        System.out.println(posts.size());
+        System.out.println(posts.get(0).getUserId());
+        System.out.println(posts.get(0).getId());
     }
 }

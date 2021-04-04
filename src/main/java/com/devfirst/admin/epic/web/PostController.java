@@ -1,7 +1,7 @@
 package com.devfirst.admin.epic.web;
 
 import com.devfirst.admin.epic.common.PaginationInfo;
-import com.devfirst.admin.epic.dto.PostResponseDto;
+import com.devfirst.admin.epic.dto.QPostResponseDto;
 import com.devfirst.admin.epic.dto.SearchDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,7 +9,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.devfirst.admin.epic.service.PostService;
@@ -26,7 +25,7 @@ public class PostController {
 	@GetMapping("/list")
 	public String index(SearchDto searchDto, Model model) {
 		PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 10, Sort.Direction.ASC, "id");
-		Page<PostResponseDto> result = postService.findAll(pageRequest, searchDto);
+		Page<QPostResponseDto> result = postService.findAll(pageRequest, searchDto);
 		PaginationInfo paginationInfo = PaginationInfo.builder()
 				.totalPageCnt(result.getTotalPages())
 				.pageable(result.getPageable())

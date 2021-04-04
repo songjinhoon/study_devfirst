@@ -78,10 +78,6 @@ public class PostApiControllerTest {
                 .andExpect(jsonPath("content").value(content))
                 .andExpect(jsonPath("user.id").value(userId))
                 .andDo(MockMvcResultHandlers.print());
-
-        Post post = postRepository.findAll().stream().filter(data -> data.getTitle().equals(title)).findFirst().orElseThrow(NoSuchElementException::new);
-        assertThat(post.getTitle()).isEqualTo(title);
-        assertThat(post.getContent()).isEqualTo(content);
     }
 
     @Test

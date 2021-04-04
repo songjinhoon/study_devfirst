@@ -9,6 +9,7 @@ import com.devfirst.admin.epic.domain.user.User;
 import com.devfirst.admin.epic.domain.user.UserRepository;
 import com.devfirst.admin.epic.dto.PostRequestDto;
 import com.devfirst.admin.epic.dto.PostResponseDto;
+import com.devfirst.admin.epic.dto.QPostResponseDto;
 import com.devfirst.admin.epic.dto.SearchDto;
 import com.google.common.collect.ImmutableMap;
 
@@ -60,7 +61,7 @@ public class PostService {
         return PostMapper.INSTANCE.postToPostResponseDto(post);
     }
 
-    public Page<PostResponseDto> findAll(final Pageable pageable, final SearchDto searchDto) {
+    public Page<QPostResponseDto> findAll(final Pageable pageable, final SearchDto searchDto) {
         return postRepository.findBySearchDto(pageable, searchDto);
     }
 
