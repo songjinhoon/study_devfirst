@@ -1,6 +1,8 @@
 package com.devfirst.admin.epic.web;
 
 import com.devfirst.admin.epic.common.PaginationInfo;
+import com.devfirst.admin.epic.config.auth.LoginUser;
+import com.devfirst.admin.epic.config.auth.dto.SessionUser;
 import com.devfirst.admin.epic.dto.QPostResponseDto;
 import com.devfirst.admin.epic.dto.SearchDto;
 import org.springframework.data.domain.Page;
@@ -23,7 +25,7 @@ public class PostController {
 	private final PostService postService;
 
 	@GetMapping("/list")
-	public String index(SearchDto searchDto, Model model) {
+	public String index(SearchDto searchDto, @LoginUser SessionUser sessionUser, Model model) {
 		PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 10, Sort.Direction.ASC, "id");
 		Page<QPostResponseDto> result = postService.findAll(pageRequest, searchDto);
 		PaginationInfo paginationInfo = PaginationInfo.builder()
@@ -33,6 +35,7 @@ public class PostController {
 		model.addAttribute("posts", result.getContent());
 		model.addAttribute("paginationInfo", paginationInfo);
 		model.addAttribute("parameter", searchDto);
+		model.addAttribute("sessionUser", sessionUser);
 		return "/post/index";
 	}
 

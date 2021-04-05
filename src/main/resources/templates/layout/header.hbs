@@ -9,3 +9,9 @@
     <link rel="stylesheet" href="/common.css">
 </head>
 <body>
+    {{#sessionUser}}
+    <div class="container spacer">
+        {{sessionUser.id}}
+        {{sessionUser.name}}
+    </div>
+    {{/sessionUser}}

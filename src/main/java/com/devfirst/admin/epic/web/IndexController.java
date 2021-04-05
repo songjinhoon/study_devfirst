@@ -18,7 +18,6 @@ public class IndexController {
     @GetMapping("/")
     public String index(@LoginUser SessionUser sessionUser, Model model) {
         if(sessionUser != null) {
-            System.out.println("::DEBUG::");
             model.addAttribute("sessionUser", sessionUser);
         }
         return "/index";
