@@ -5,6 +5,11 @@ const contextPath = document.getElementById('contextPathHolder').dataset.context
 $('#postMove').on('click', e => {
     window.location.href = `${contextPath}/post/list`;
 });
-$('#statistics').on('click', e => {
+
+$('#statisticsMove').on('click', e => {
     window.location.href = `${contextPath}/statistics/index`;
+});
+
+$('#dashboardMove').on('click', e => {
+   window.location.href = `${contextPath}/dashboard/index`;
 });
