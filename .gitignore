@@ -20,7 +20,7 @@ generated/
 
 # webpack
 node_modules/
-/app/out/
+out
 package-lock.json
 
 # Security
