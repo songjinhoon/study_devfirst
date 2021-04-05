@@ -15,22 +15,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	const time = '20210405';
 	const queryParams = `?ServiceKey=${serviceKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&dataType=${dataType}&data=${data}&time=${time}`;
 	const requestUrl = url + queryParams;
-	$.ajax({
+	// 최신 데이터 부터 10개
+	axios({
 		method: 'get',
-		url: requestUrl,
-		success: response => {
-			const items = response.response.body.items.item[0];
-			const item = items['rdr-img-file'].replace('[', '').replace(']', '');
-			const itemArr = item.split(',');
-			const radar1Dom = document.querySelector('.radar1');
-			for(const data of itemArr) {
+		url: requestUrl
+	}).then(response => {
+		console.log(response);
+		const items = response.data.response.body.items.item[0];
+		const item = items['rdr-img-file'].replace('[', '').replace(']', '');
+		const itemArr = item.split(',').reverse();
+		const radar1Dom = document.querySelector('.radar1');
+		let count = 1;
+		for(let i=0; i<itemArr.length; i+=12) {
+			if(count === 11) {
+				break;
+			}else {
+				count++;
 				const dataDom = document.createElement("img");
-				dataDom.setAttribute('src', data);
+				dataDom.setAttribute('src', itemArr[i]);
 				radar1Dom.append(dataDom);
 			}
-		},
-		error: response => {
-			console.log(response);
 		}
+	}).catch(response => {
+		console.log(response);
 	});
 });
