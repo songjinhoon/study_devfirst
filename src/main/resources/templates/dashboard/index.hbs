@@ -1,38 +1,17 @@
 {{>layout/header}}
 
     <div class="container">
-        <div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
-            <div><h3>5</h3></div>
-            <div><h3>6</h3></div>
+        <div class="your-class">
+            <div>your content</div>
+            <div>your content</div>
+            <div>your content</div>
+            <div>your content</div>
+            <div>your content</div>
+            <div>your content</div>
         </div>
     </div>
-    <div class="container radar1"></div>
+    <div class="container">
+        <div class="radar1"></div>
+    </div>
+
 {{>layout/footer}}
-
-<!--
-<script>
-    $(document).ready(function () {
-        const serviceKey = '7ybMtm52Wvh5bOH8PhzGTk%2Bramhq1PsDZgL5B0dstTb%2FcqiNGoCYylggaTrr1iWyDjCj5K5ux6Gr1eYIwmol9g%3D%3D';
-        const pageNo = 1;
-        const numOfRows = 10;
-        const dataType = 'XML';
-        const doc = 'KWK';
-        const requestUrl = `http://apis.data.go.kr/1360000/RadarImgInfoService/getRadarIndvdlzImg?serviceKey=${serviceKey}&pageNo=1&numOfRows=10&dataType=XML&doc=KWK&time=20210405`;
-
-        $.ajax({
-            method: 'GET',
-            url: requestUrl,
-            type: 'jsonp',
-            success: function (response) {
-                alert('뿅');
-            },
-            error: function (error) {
-                alert('띠로링');
-            }
-        })
-    });
-</script>-->
