@@ -1,17 +1,11 @@
 {{>layout/header}}
 
     <div class="container">
-        <div class="your-class">
-            <div>your content</div>
-            <div>your content</div>
-            <div>your content</div>
-            <div>your content</div>
-            <div>your content</div>
-            <div>your content</div>
+        <div class="radar1">
+            {{#radarUrl}}
+                <img src="{{.}}">
+            {{/radarUrl}}
         </div>
-    </div>
-    <div class="container">
-        <div class="radar1"></div>
     </div>
 
 {{>layout/footer}}

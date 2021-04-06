@@ -17,8 +17,10 @@ public class DashboardController {
 	private final DashboardService dashboardService;
 
 	@GetMapping("/index")
-	public String getIndex(@LoginUser SessionUser sessionUser, Model model) {
+	public String getIndex(@LoginUser SessionUser sessionUser, Model model) throws Exception {
+
 		model.addAttribute("sessionUser", sessionUser);
+		model.addAttribute("radarUrl", dashboardService.getRadarData());
 		return "/dashboard/index";
 	}
 }
