@@ -20,7 +20,7 @@ public class DashboardController {
 	public String getIndex(@LoginUser SessionUser sessionUser, Model model) throws Exception {
 
 		model.addAttribute("sessionUser", sessionUser);
-		model.addAttribute("radarUrl", dashboardService.getRadarData());
+		model.addAttribute("radarData", dashboardService.getRadarData());
 		return "/dashboard/index";
 	}
 }

@@ -2,9 +2,12 @@
 
     <div class="container">
         <div class="radar1">
-            {{#radarUrl}}
-                <img src="{{.}}">
-            {{/radarUrl}}
+            {{#radarData}}
+                <div>
+                    <p>{{name}}</p>
+                    <img src="{{url}}">
+                </div>
+            {{/radarData}}
         </div>
     </div>
 
