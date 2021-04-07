@@ -1,12 +1,10 @@
 package com.devfirst.admin.epic.config;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -20,7 +18,8 @@ public class ThymeleafViewResolverConfig {
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver  templateResolver = new SpringResourceTemplateResolver ();
-        templateResolver.setPrefix("classpath:templates/thymeleaf/");
+        //templateResolver.setPrefix("classpath:templates/thymeleaf/");
+        templateResolver.setPrefix("file:src/main/resources/templates/thymeleaf/");
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("LEGACYHTML5");
@@ -44,8 +43,7 @@ public class ThymeleafViewResolverConfig {
     }
 
     @Bean
-    @Autowired
-    public ViewResolver viewResolver(MessageSource messageSource) {
+    public ThymeleafViewResolver viewResolver(MessageSource messageSource) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine(messageSource));
         viewResolver.setCharacterEncoding("UTF-8");
