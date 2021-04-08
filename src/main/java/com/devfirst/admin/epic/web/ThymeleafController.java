@@ -26,6 +26,22 @@ public class ThymeleafController {
 
     private final PostService postService;
 
+    @GetMapping(value = "/main")
+    public String getMain(SearchDto searchDto, Model model) throws Exception {
+        PostRequestDto postRequestDto = PostRequestDto.builder()
+                .title("타이틀")
+                .content("내용")
+                .userId(1L)
+                .build();
+        for(int i=0; i<100; i++) {
+            postService.save(postRequestDto);
+        }
+        PageRequest pageRequest = PageRequest.of(searchDto.getPage() - 1, 10, Sort.Direction.ASC, "id");
+        Page<QPostResponseDto> result = postService.findAll(pageRequest, searchDto);
+        model.addAttribute("posts", result.getContent());
+        return "thymeleaf/defaultLayout";
+    }
+
     @GetMapping(value = "/index")
     public String getIndex(@LoginUser SessionUser sessionUser, SearchDto searchDto, Model model) throws Exception {
         PostRequestDto postRequestDto = PostRequestDto.builder()
@@ -58,5 +74,4 @@ public class ThymeleafController {
         model.addAttribute("pageNum", pageNum);
         return "thymeleaf/index2";
     }
-
 }

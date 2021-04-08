@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div class="container commonHeader" th:fragment="commonHeader" th:object="${session.user}">
+        <p>아이디: <span th:text="*{id}"></span></p>
+        <p>이름: <span th:text="*{name}"></span></p>
+        <p>이메일: <span th:text="*{email}"></span></p>
+    </div>
+</html>

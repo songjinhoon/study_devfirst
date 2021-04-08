@@ -1,4 +1,11 @@
-h2 {
-    margin-top: 100px;
-    color: blue;
+.commonHeader {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.commonHeader p {
+    padding-left: 10px;
+}
+.commonHeader span {
+    color: aqua;
 }
