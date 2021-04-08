@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Thymeleaf Test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/thymeleaf.css}">
 </head>
 <body>
-    <h2 th:text="#{title.list}">List of Seed Starters</h2>
-    <p th:text="#{seedstarter.datePlanted}">Date Planted</p>
-    <p>뾰로롱</p>
+    <div class="section1">
+        <h2>뾰로롱222222</h2>
+        <span th:text="${#locale.country}">US</span><br>
+        <span th:text="${#locale.getDisplayName()}"></span><br>
+        <span th:text="${#servletContext.getContextPath()}"></span><br>
+        <span th:text="${#calendars.createNow()}"></span><br>
+        <span th:text="${#dates.format(date, 'yyyy-MM-dd HH:mm')}"></span><br>
+        <a th:href="@{http://localhost:9980/dev/th/hrefTest}">이동 - 기본</a><br>
+        <a th:href="@{/th/hrefTest}">이동 - 기본</a><br>
+        <a th:href="@{/th/hrefTest(pageNum=${pageNum})}">이동 - RequestParam</a><br>
+        <a th:href="@{/th/hrefTest/{pageNum}(pageNum=${pageNum})}">이동 - PathVariable1</a><br>
+        <a th:href="@{/th/{pageNum}/hrefTest(pageNum=${pageNum})}">이동 - PathVariable2</a><br>
+        <p>숫자 리터럴: <span th:text="2013 + 2"></span></p>
+        <p>숫자 리터럴: <span th:text="${pageNum} + 2"></span></p>
+        <p th:if="${pageNum} eq 5">pageNum은 5입니다.</p>
+        <p th:if="${pageNum} < 6">pageNum은 6보다 작습니다.</p>
+        <div th:if="${pageNum} == 6">
+            <p>pageNum은 6입니다.</p>
+        </div>
+        <p th:text="'pageNum의 값은' + ${pageNum} + '입니다.'"></p>
+        <p th:text="|Welcome to Tymeleaf, pageNum현재: ${pageNum}|"></p>
+        <p>data check: <span th:text="${dataCheck} ?: _">no data...</span></p>
+        <p>data check: <span th:text="${dataCheck} ?: 'no data...'"></span></p>
+        <img th:src="@{/images/image1.png}" width="100" height="100">
+        <img th:src="@{/images/woowabros.jpg}" width="100" height="100">
+    </div>
+    <div class="section2" th:object="${sessionUser}">
+        <p>id: <span th:text="*{id}"></span></p>
+        <p>name: <span th:text="*{name}"></span></p>
+        <p>email: <span th:text="*{email}"></span></p>
+    </div>
+    <div class="section3" th:object="${session.user}">
+        <p>id: <span th:text="*{id}"></span></p>
+        <p>name: <span th:text="*{name}"></span></p>
+        <p>email: <span th:text="*{email}"></span></p>
+    </div>
+
+
+
+
+    <hr>
     <table>
         <thead>
         <tr>

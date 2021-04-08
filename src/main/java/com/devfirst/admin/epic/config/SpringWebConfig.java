@@ -3,7 +3,6 @@ package com.devfirst.admin.epic.config;
 import com.devfirst.admin.epic.common.DateFormatter;
 import com.devfirst.admin.epic.config.auth.LoginUserArgumentResolver;
 import lombok.RequiredArgsConstructor;
-import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -35,6 +34,13 @@ public class SpringWebConfig implements WebMvcConfigurer {
     }
 
     /* 타임리프 설정 */
+    @Override
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**").addResourceLocations("file:src/main/resources/static/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("file:src/main/resources/static/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("file:src/main/resources/static/js/");
+    }
+
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
@@ -62,7 +68,7 @@ public class SpringWebConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver ();
         //templateResolver.setPrefix("classpath:templates/thymeleaf/");
-        templateResolver.setPrefix("file:src/main/resources/templates/thymeleaf/");
+        templateResolver.setPrefix("file:src/main/resources/templates/");
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("LEGACYHTML5");
@@ -75,15 +81,15 @@ public class SpringWebConfig implements WebMvcConfigurer {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setTemplateEngineMessageSource(messageSource);
-        templateEngine.addDialect(layoutDialect());
+        /*templateEngine.addDialect(layoutDialect());*/
 
         return templateEngine;
     }
 
-    @Bean
+    /*@Bean
     public LayoutDialect layoutDialect() {
         return new LayoutDialect();
-    }
+    }*/
 
     @Bean
     public ThymeleafViewResolver viewResolver(MessageSource messageSource) {
