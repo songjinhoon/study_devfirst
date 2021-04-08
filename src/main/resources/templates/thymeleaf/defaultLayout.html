@@ -6,8 +6,9 @@
     <th:block th:replace="thymeleaf/fragments/commonHead"></th:block>
 </head>
 <body>
-    <header th:insert="thymeleaf/fragments/commonHeader :: commonHeader"></header>
-    <section th:insert="thymeleaf/post/index :: index"></section>
+    <th:block layout:fragment="header"><header th:replace="thymeleaf/fragments/commonHeader :: commonHeader"></header></th:block>
+    <th:block layout:fragment="postListArea"><section th:insert="thymeleaf/post/index :: index"></section></th:block>
+    <section th:insert="thymeleaf/fragments/commonPageDiv :: commonPageDiv"></section>
     <section th:insert="thymeleaf/post/section01 :: point"></section>
     <section th:replace="thymeleaf/post/section01 :: #point"></section>
     <footer th:insert="thymeleaf/fragments/commonFooter :: commonFooter"></footer>
