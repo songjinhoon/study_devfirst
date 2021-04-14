@@ -51,6 +51,10 @@ dependencies {
     // handlebar
     implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.2'
     implementation 'org.beryx:handlebars-java-helpers:0.4.1'
+    // thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect';
+    //implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'
     // lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

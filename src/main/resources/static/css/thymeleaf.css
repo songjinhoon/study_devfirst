@@ -1,0 +1,11 @@
+.commonHeader {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.commonHeader p {
+    padding-left: 10px;
+}
+.commonHeader span {
+    color: aqua;
+}

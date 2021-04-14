@@ -35,6 +35,8 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                 post.id,
                 post.title,
                 post.content,
+                post.createdDate,
+                post.modifiedDate,
                 post.user.id.as("userId")))
                 .from(post)
                 .where(eqTitle(searchDto.getTitle()), eqContent(searchDto.getContent()))
