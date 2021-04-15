@@ -1,8 +1,9 @@
+/* 수정해야함 */
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => {
-    const clientPath = path.resolve(__dirname, 'src/main/frontend');
+    const clientPath = path.resolve(__dirname, 'src/main/fronend');
     const outputPath = path.resolve(__dirname, (env == 'production') ? 'src/main/resources/static/out' : 'src/main/frontend/out')
 
     return {
