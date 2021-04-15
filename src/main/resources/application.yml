@@ -19,8 +19,6 @@ spring:
     store-type: jdbc
   datasource:
     url: jdbc:h2:mem:testdb;MODE=mysql;
-  #freemarker:
-    #cache: false
   #datasource:
     #url: jdbc:h2:mem:testdb;MODE=mysql;
     #platform: h2

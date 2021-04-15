@@ -4,6 +4,7 @@ import axios from 'axios';
 const contextPath = document.getElementById('contextPathHolder').dataset.contextPath;
 
 $(document).ready(function (){
+    alert('뿅');
 });
 
 // 페이징

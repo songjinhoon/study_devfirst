@@ -24,7 +24,7 @@ module.exports = (env) => {
             publicPath: '/',
             /*host: '0.0.0.0',*/
             host: 'localhost',
-            port: 8081,
+            port: 9981,
             proxy: {
                 '**': 'http://localhost:9980'
             },

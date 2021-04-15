@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <div class="container" th:fragment="index">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th></th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성일</th>
+                <th>수정일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post: ${posts}">
+                <td><input type="checkbox" /></td>
+                <td th:text="${post.title}"></td>
+                <td th:text="${post.content}"></td>
+                <td th:text="${post.createdDate}"></td>
+                <td th:text="${post.modifiedDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</html>

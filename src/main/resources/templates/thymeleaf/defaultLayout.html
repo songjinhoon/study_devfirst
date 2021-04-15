@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">DefaultLayout Title</title>
+    <!-- CSS-->
+    <th:block th:replace="thymeleaf/fragments/commonHead"></th:block>
+</head>
+<body>
+    <th:block layout:fragment="header"><header th:replace="thymeleaf/fragments/commonHeader :: commonHeader"></header></th:block>
+    <th:block layout:fragment="postListArea"><section th:insert="thymeleaf/post/index :: index"></section></th:block>
+    <section th:insert="thymeleaf/fragments/commonPageDiv :: commonPageDiv"></section>
+    <section th:insert="thymeleaf/post/section01 :: point"></section>
+    <section th:replace="thymeleaf/post/section01 :: #point"></section>
+    <footer th:insert="thymeleaf/fragments/commonFooter :: commonFooter"></footer>
+</body>
+</html>

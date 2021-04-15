@@ -2,9 +2,12 @@ package com.devfirst.admin.epic.config.auth;
 
 import com.devfirst.admin.epic.domain.user.Role;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity // Spring security 활성화
@@ -14,6 +17,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        /* 시큐리티 사용 시 필터는 여기다 걸어줘야한다. */
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        http.addFilterBefore(filter, CsrfFilter.class);
         http
                 .csrf().disable()
                 .headers().frameOptions().disable()  //h2-console 사용하기 위함 
