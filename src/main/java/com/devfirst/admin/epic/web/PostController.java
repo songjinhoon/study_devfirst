@@ -36,7 +36,7 @@ public class PostController {
 		model.addAttribute("paginationInfo", paginationInfo);
 		model.addAttribute("parameter", searchDto);
 		model.addAttribute("sessionUser", sessionUser);
-		return "/post/index";
+		return "post/index";
 	}
 
 	@GetMapping("/write")
